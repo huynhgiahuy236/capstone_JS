@@ -1,0 +1,9 @@
+# Dependency directories
+node_modules/
+
+# Tailwind output - Quan trọng nhất để tránh lỗi merge
+src/css/output.css
+
+# OS generated files
+.DS_Store
+Thumbs.db
