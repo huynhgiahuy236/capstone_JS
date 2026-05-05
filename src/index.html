@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./img/logo_store.png">
+    <title>PhoneHub - Smartphone Đỉnh Cao</title>
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Tailwind Output & App CSS -->
+    <link rel="stylesheet" href="./css/output.css">
+
+</head>
+
+<body class="font-sans text-gray-900 bg-gray-50">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-blue-800 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-8 ">
+                <img src="./img/logo_store.png" alt="Logo" class="w-16 h-auto">
+                <div class="hidden md:flex space-x-6 font-medium text-sm text-white">
+                    <a href="#sanPham" class="hover:text-blue-600 transition-colors">Sản phẩm</a>
+                    <a href="#uuDai" class="hover:text-blue-600 transition-colors">Ưu đãi</a>
+                    <a href="#blog" class="hover:text-blue-600 transition-colors">Bài viết</a>
+                    <a href="#contact" class="hover:text-blue-600 transition-colors">Liên hệ</a>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="hidden lg:block flex-1 max-w-md mx-8">
+                <div class="relative">
+                    <input type="text" id="headerSearchInput"
+                        class="w-full bg-gray-100 border-none rounded-xl pl-10 p-2.5 text-sm focus:ring-2 focus:ring-blue-500/20 transition-all"
+                        placeholder="Tìm kiếm điện thoại...">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                </div>
+            </div>
+
+            <!-- Giỏ hàng -->
+            <button id="btnGioHang" class="relative p-2 text-gray-700 hover:text-blue-600 transition">
+                <div class="items-center gap-2 flex bg-white rounded-lg py-2 px-3">
+                    <i class="fa-solid fa-cart-shopping text-xl font-medium text-blue-700"></i>
+                    <span class="font-medium text-blue-700">Giỏ hàng</span>
+                </div>
+                <span id="badgeGioHang"
+                    class="absolute top-0 right-0 bg-red-500 text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
+            </button>
+            <div class="items-center flex bg-white rounded-lg py-2 px-3">
+                <a href="./admin.html" class=" transition-colors font-medium text-blue-700">Trang quản trị <i
+                        class="fa-solid fa-user-tie ml-2"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner Section -->
+    <section class="pt-24">
+        <div class="container mx-auto px-4">
+            <div class="swiper myBanner rounded-[32px] overflow-hidden shadow-xl aspect-[21/9] sm:aspect-[25/9]">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="./img/banner_1.png" alt="Banner 1"
+                            class="w-full h-full object-cover"></div>
+                    <div class="swiper-slide"><img src="./img/banner_2.jpg" alt="Banner 2"
+                            class="w-full h-full object-cover"></div>
+                    <div class="swiper-slide"><img src="./img/banner_3.jpg" alt="Banner 3"
+                            class="w-full h-full object-cover"></div>
+                    <div class="swiper-slide"><img src="./img/banner_4.webp" alt="Banner 4"
+                            class="w-full h-full object-cover"></div>
+                    <div class="swiper-slide"><img src="./img/banner-7.webp" alt="Banner 5"
+                            class="w-full h-full object-cover"></div>
+                    <div class="swiper-slide"><img src="./img/banner_5.jpg" alt="Banner 6"
+                            class="w-full h-full object-cover"></div>
+                </div>
+                <div
+                    class="swiper-button-next !text-white !w-10 !h-10 bg-black/10 hover:bg-black/30 backdrop-blur-sm rounded-full after:!text-sm transition-all">
+                </div>
+                <div
+                    class="swiper-button-prev !text-white !w-10 !h-10 bg-black/10 hover:bg-black/30 backdrop-blur-sm rounded-full after:!text-sm transition-all">
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content: Danh sách sản phẩm -->
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-16" id="sanPham">
+        <!-- Header: Tiêu đề "ĐIỆN THOẠI" căn giữa và có gạch đỏ dưới như ảnh -->
+        <div class="text-center mb-10">
+            <h2
+                class="text-2xl font-bold text-red-600 uppercase tracking-widest inline-block relative pb-2 border-b-2 border-red-500">
+                Điện thoại
+            </h2>
+        </div>
+
+
+
+        <!-- Hàng Filter Brand & Tìm kiếm -->
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6 mb-10 bg-[#85aac5] p-2 rounded-3xl">
+            <!-- Nút Brand: Đã thêm Google, OnePlus và hiệu ứng mượt hơn -->
+            <div class="flex flex-wrap items-center gap-2" id="brandFilterContainer">
+                <button
+                    class="brand-tab active px-5 py-2 rounded-full text-xs font-bold transition-all border border-gray-200 bg-blue-900 text-white shadow-md shadow-blue-200"
+                    data-brand="all">Tất Cả</button>
+                <button
+                    class="brand-tab px-5 py-2 rounded-full text-xs font-medium transition-all border border-gray-200 bg-white hover:border-blue-500 text-gray-600 hover:text-blue-600"
+                    data-brand="iphone">iPhone</button>
+                <button
+                    class="brand-tab px-5 py-2 rounded-full text-xs font-medium transition-all border border-gray-200 bg-white hover:border-blue-500 text-gray-600 hover:text-blue-600"
+                    data-brand="samsung">Samsung</button>
+                <button
+                    class="brand-tab px-5 py-2 rounded-full text-xs font-medium transition-all border border-gray-200 bg-white hover:border-blue-500 text-gray-600 hover:text-blue-600"
+                    data-brand="xiaomi">Xiaomi</button>
+                <button
+                    class="brand-tab px-5 py-2 rounded-full text-xs font-medium transition-all border border-gray-200 bg-white hover:border-blue-500 text-gray-600 hover:text-blue-600"
+                    data-brand="oppo">OPPO</button>
+                <button
+                    class="brand-tab px-5 py-2 rounded-full text-xs font-medium transition-all border border-gray-200 bg-white hover:border-blue-500 text-gray-600 hover:text-blue-600"
+                    data-brand="google">Google</button>
+                <button
+                    class="brand-tab px-5 py-2 rounded-full text-xs font-medium transition-all border border-gray-200 bg-white hover:border-blue-500 text-gray-600 hover:text-blue-600"
+                    data-brand="oneplus">OnePlus</button>
+
+                <div class="h-6 w-[1px] bg-gray-200 mx-2 hidden sm:block"></div>
+
+                <!-- Sắp xếp -->
+                <select
+                    class="bg-white border border-gray-200 rounded-full px-4 py-2 text-xs font-bold outline-none focus:border-blue-500 shadow-sm cursor-pointer"
+                    id="sortProduct">
+                    <option value="default">Mặc định</option>
+                    <option value="price-asc">Giá thấp -> cao</option>
+                    <option value="price-desc">Giá cao -> thấp</option>
+                </select>
+            </div>
+
+            <!-- Ô tìm kiếm -->
+            <div class="w-full lg:max-w-xs relative">
+                <input type="text" id="searchInput"
+                    class="w-full bg-white border border-gray-200 rounded-full pl-10 pr-4 py-2.5 text-xs focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none shadow-sm font-medium"
+                    placeholder="Tìm kiếm sản phẩm...">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- Layout chia cột: Sidebar & Products -->
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <!-- Sidebar: 2 Banner -->
+            <aside class="hidden lg:block w-1/4">
+                <div class="sticky top-24 flex flex-col gap-6">
+                    <div
+                        class="group cursor-pointer overflow-hidden rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 aspect-[1/1.5] bg-gray-200">
+                        <img src="./img/sliderleft.webp" alt="QC 1"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                    <div
+                        class="group cursor-pointer overflow-hidden rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 aspect-[1/1.5] bg-gray-200">
+                        <img src="./img/sliderright.webp" alt="QC 2"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Danh sách sản phẩm -->
+            <div class="flex-1 bg-[#85aac5] rounded-3xl p-2">
+                <div id="loading" class="hidden flex justify-center py-20">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
+                </div>
+
+                <div id="danhSachSP" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <!-- Sản phẩm render ở đây -->
+                </div>
+
+                <div class="flex justify-center items-center space-x-2 mt-12" id="pagination"></div>
+            </div>
+        </div>
+    </main>
+    <!-- Phần mở rộng: Ưu đãi & Mạng xã hội -->
+    <div class="container mx-auto px-4 pb-24 space-y-24" id="uuDai">
+        <!-- Gian hàng ưu đãi (Đã fix đều nhau) -->
+        <section>
+            <h2 class="text-xl font-black text-gray-800 mb-8 uppercase tracking-widest border-l-4 border-blue-600 pl-4">
+                Gian hàng ưu đãi</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Banner 1 -->
+                <div
+                    class="group cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-200 aspect-[3/4]">
+                    <img src="./img/sales_1.avif" alt="Ưu đãi 1"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <!-- Banner 2 -->
+                <div
+                    class="group cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-200 aspect-[3/4]">
+                    <img src="./img/sales_2.jpg" alt="Ưu đãi 2"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <!-- Banner 3 -->
+                <div
+                    class="group cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-200 aspect-[3/4]">
+                    <img src="img/sales_3.jpg" alt="Ưu đãi 3"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <!-- Banner 4 -->
+                <div
+                    class="group cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-200 aspect-[3/4]">
+                    <img src="img/sales_4.webp" alt="Ưu đãi 4"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+            </div>
+        </section>
+        <hr class="text-gray-200" id="blog">
+        <!-- Mạng xã hội (Tin tức/Blog) -->
+        <section class="bg-white p-12 rounded-[3.5rem] shadow-sm border border-gray-100">
+            <h2 class="text-2xl font-black text-gray-800 mb-10">Mạng xã hội phonehub.com</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Blog Item -->
+                <a href="#" class="group block space-y-4">
+                    <div class="aspect-video overflow-hidden rounded-3xl bg-gray-50">
+                        <img src="img/gps_phone.jpg" alt="News"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p
+                        class="text-sm font-bold text-gray-700 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        Mách bạn cách khắc phục vị trí GPS không chính xác cực hay
+                    </p>
+                </a>
+                <a href="#" class="group block space-y-4">
+                    <div class="aspect-video overflow-hidden rounded-3xl bg-gray-50">
+                        <img src="img/lechmau.webp" alt="News"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p
+                        class="text-sm font-bold text-gray-700 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        Độ sai lệch màu Delta E có ý nghĩa gì? Nên chọn màn hình thế nào?
+                    </p>
+                </a>
+                <a href="#" class="group block space-y-4">
+                    <div class="aspect-video overflow-hidden rounded-3xl bg-gray-50">
+                        <img src="img/thanhtoan" alt="News"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p
+                        class="text-sm font-bold text-gray-700 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        Thanh toán qua thẻ UOB, giảm ngay 500.000đ cho tất cả sản phẩm
+                    </p>
+                </a>
+                <a href="#" class="group block space-y-4">
+                    <div class="aspect-video overflow-hidden rounded-3xl bg-gray-50">
+                        <img src="img/oppox9.jpg" alt="News"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <p
+                        class="text-sm font-bold text-gray-700 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
+                        OPPO Find X9s có gì mới? Đánh giá chi tiết siêu phẩm camera
+                    </p>
+                </a>
+            </div>
+            <div class="mt-12 text-center">
+                <a href="#"
+                    class="text-blue-900 font-black text-xs uppercase tracking-widest hover:underline inline-flex items-center gap-2">
+                    Xem thêm <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 pt-20 pb-10" id="contact">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-16">
+                <div>
+                    <h2 class="text-3xl font-black text-blue-900 mb-2 italic">Liên hệ với PhoneStore</h2>
+                    <p class="text-gray-500 mb-8 font-medium">Hỗ trợ tư vấn miễn phí 24/7</p>
+                    <form class="space-y-4">
+                        <input type="text" placeholder="Họ và tên"
+                            class="w-full bg-gray-50 border-none rounded-2xl p-4 text-sm">
+                        <input type="email" placeholder="Email liên hệ"
+                            class="w-full bg-gray-50 border-none rounded-2xl p-4 text-sm">
+                        <textarea placeholder="Nội dung cần hỗ trợ..."
+                            class="w-full bg-gray-50 border-none rounded-2xl p-4 text-sm h-32 resize-none"></textarea>
+                        <button type="submit"
+                            class="bg-blue-600 text-white px-10 py-4 rounded-2xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all">Gửi
+                            tin nhắn</button>
+                    </form>
+                </div>
+                <div class="lg:pl-16 flex flex-col justify-center">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div
+                            class="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl shadow-xl shadow-blue-100">
+                            <i class="fa-solid fa-mobile-retro"></i>
+                        </div>
+                        <span class="text-4xl font-black text-blue-900 tracking-tighter">PhoneStore</span>
+                    </div>
+                    <div class="space-y-5 text-gray-600 font-medium">
+                        <div class="flex items-center gap-4"><i class="fa-solid fa-location-dot text-blue-500"></i>Trụ
+                            sở: 112 Cao Thắng, Quận 3</div>
+                        <div class="flex items-center gap-4"><i class="fa-solid fa-phone text-blue-500"></i> 1900 8888
+                        </div>
+                        <div class="flex items-center gap-4"><i class="fa-solid fa-envelope text-blue-500"></i>
+                            hello@phonestore.vn</div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-50 pt-10 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">
+                <p>© 2026 PhoneStore. Thiết kế bởi <span class="text-blue-600">Hà Phượng & Gia Huy </span>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Popups -->
+    <div id="popupGioHang" class="fixed inset-0 z-[100] hidden">
+        <div id="overlayGioHang" class="fixed inset-0 bg-black/40 backdrop-blur-sm"></div>
+        <div class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl p-8 overflow-y-auto">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-2xl font-black text-blue-900">Giỏ hàng</h3>
+                <button class="close-cart text-3xl text-gray-400 hover:text-black">&times;</button>
+            </div>
+            <div id="noiDungGioHang" class="space-y-6"></div>
+            <div class="mt-5 border-t border-t-gray-300 pt-6">
+                <button class="w-full bg-blue-900 text-white py-5 rounded-2xl font-bold hover:bg-black transition-all"
+                    id="btnThanhToan">Thanh toán ngay</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popupChiTiet" class="fixed inset-0 z-[100] hidden">
+        <div id="overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm"></div>
+        <div
+            class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] max-w-2xl bg-white rounded-[3rem] p-10 shadow-2xl">
+            <button id="btnClose"
+                class="absolute top-6 right-8 text-4xl text-gray-300 hover:text-black">&times;</button>
+            <div id="popupContent"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="app.js"></script>
+</body>
+
+</html>
