@@ -28,36 +28,75 @@ export const toggleLoading = (isLoading) => {
 
 export const renderProductList = (products) => {
   el.productTableList.innerHTML = "";
+
   if (products.length === 0) {
     el.productTableList.innerHTML = `
-        <tr>
-            <td colspan="7" class="text-center">Không tìm thấy sản phẩm nào</td>
-        </tr>`;
+      <tr>
+        <td colspan="7" class="text-center">Không tìm thấy sản phẩm nào</td>
+      </tr>`;
     return;
   }
-  const content = products
-    .map((phone) => {
-      const quantityDisplay =
-        Number(phone.quantity) === 0 ? `<span class="text-red-500 font-bold">Hết hàng</span>` : phone.quantity;
-      return `
-        <tr class="text-left">
-            <td>${phone.id}</td>
-            <td><img src="${phone.img}" class="w-12 h-12 object-cover rounded"></td>
-            <td class="font-medium">${phone.name}</td>
-            <td>${phone.type}</td>
-            <td>${phone.price.toLocaleString()} VND</td>
-            <td>${quantityDisplay}</td>
-            <td class="flex items-center gap-3 h-full mt-2">
-                <button onclick="editProduct(${phone.id})" class="info-btn px-1.5 py-0.5"><i class="fa-solid fa-pencil fa-xs" style="color: white"></i></button>
-                <button onclick="deleteProduct(${phone.id})" class="danger-btn px-1.5 py-0.5"><i class="fa-solid fa-trash fa-xs" style="color: white"></i></button>
-            </td>
-        </tr>
-    `;
-    })
-    .join("");
-  el.productTableList.innerHTML = content;
-};
 
+  // ===== PAGINATION LOGIC =====
+  const start = (state.currentPage - 1) * state.pageSize;
+  const end = start + state.pageSize;
+  const items = products.slice(start, end);
+
+  const content = items.map((phone) => {
+    const quantityDisplay =
+      Number(phone.quantity) === 0
+        ? `<span class="text-red-500 font-bold">Hết hàng</span>`
+        : phone.quantity;
+
+    return `
+      <tr class="text-left">
+        <td>${phone.id}</td>
+        <td><img src="${phone.img}" class="w-12 h-12 object-cover rounded"></td>
+        <td class="font-medium">${phone.name}</td>
+        <td>${phone.type}</td>
+        <td>${phone.price.toLocaleString()} VND</td>
+        <td>${quantityDisplay}</td>
+        <td class="flex items-center gap-3 mt-2">
+          <button onclick="editProduct(${phone.id})" class="info-btn px-1.5 py-0.5">
+            <i class="fa-solid fa-pencil fa-xs text-white"></i>
+          </button>
+          <button onclick="deleteProduct(${phone.id})" class="danger-btn px-1.5 py-0.5">
+            <i class="fa-solid fa-trash fa-xs text-white"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+
+  el.productTableList.innerHTML = content;
+
+  renderPagination(products.length);
+};
+export const renderPagination = (totalItems) => {
+  const totalPages = Math.ceil(totalItems / state.pageSize);
+
+  const container = document.getElementById("pagination");
+  if (!container) return;
+
+  let html = "";
+
+  for (let i = 1; i <= totalPages; i++) {
+    html += `
+      <button 
+        onclick="changePage(${i})"
+        class="px-3 py-1 rounded-lg text-sm font-medium 
+        ${i === state.currentPage ? 'bg-blue-600 text-white' : 'bg-gray-200'}">
+        ${i}
+      </button>
+    `;
+  }
+
+  container.innerHTML = html;
+};
+window.changePage = (page) => {
+  state.currentPage = page;
+  renderProductList(state.productList);
+};
 export const updateDashboard = (products) => {
   const types = [...new Set(products.map((p) => p.type))].length;
   const quantity = products.reduce((sum, p) => sum + Number(p.quantity), 0);
