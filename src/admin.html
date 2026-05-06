@@ -1,263 +1,229 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
-    <title>Admin - Phone Hub</title>
-    <!-- link font awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <!-- axios -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js"
-      integrity="sha512-h9644v03pHqrIHThkvXhB2PJ8zf5E9IyVnrSfZg8Yj8k4RsO4zldcQc4Bi9iVLUCCsqNY0b4WXVV4UB+wbWENA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <!-- link css -->
-    <link rel="stylesheet" href="./css/output.css" />
-  </head>
-  <body class="bg-white dark:bg-[#020713] relative box-border overflow-x-hidden">
-    <header id="navbar" class="fixed top-0 left-0 z-50 w-full">
-      <nav
-        id="navbar-content"
-        class="wrapper flex items-center justify-between gap-2 py-4 border-b border-b-gray-200 dark:border-b-gray-800 bg-white dark:bg-[#061223]"
-      >
-        <div id="nav-left" class="flex items-center sm:flex-row flex-col">
-          <a href="">
-            <img src="./img/light-logo.png" class="w-full inline-block dark:hidden" />
-            <img src="./img/dark-logo.png" class="w-full hidden dark:inline-block" />
-          </a>
-          <span class="h-0.5 w-12 sm:h-9 sm:w-1 bg-gray-300"></span>
-          <span class="text-xs sm:text-sm font-medium pt-3 px-0 sm:pt-0 sm:pl-3 uppercase tracking-widest"
-            >Quản trị viên</span
-          >
-        </div>
-        <div id="nav-right" class="flex items-center gap-2 sm:gap-7">
-          <button
-            id="theme-toggle"
-            class="cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-950 hover:rounded-full hover:rotate-35 w-11 h-11 duration-300"
-          >
-            <span class="dark:hidden"
-              ><i class="fa-regular fa-moon fa-flip-horizontal fa-xl" style="color: midnightblue"></i
-            ></span>
-            <span class="hidden dark:flex dark:items-center dark:justify-center"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                class="w-7 h-7"
-              >
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="4"></line>
-                <line x1="12" y1="20" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"></line>
-                <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="4" y2="12"></line>
-                <line x1="20" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"></line>
-                <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"></line></svg
-            ></span>
-          </button>
-          <button onclick="window.location.href = '../index.html'" class="info-btn px-6 py-2 flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              class="w-4 h-4"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-              />
-            </svg>
-            <span class="hidden lg:inline-block">Trang người dùng</span>
-          </button>
-        </div>
-      </nav>
-    </header>
-    <main class="wrapper pt-36 pb-18 lg:pt-40 lg:pb-20">
-      <div>
-        <h1 class="text-3xl font-bold">Bảng điều khiển</h1>
-        <p class="italic text-gray-500 pt-2">Quản lý kho sản phẩm - kết nối realtime với MockAPI</p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
+  <title>Admin - Phone Hub</title>
+  <!-- link font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- axios -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js"
+    integrity="sha512-h9644v03pHqrIHThkvXhB2PJ8zf5E9IyVnrSfZg8Yj8k4RsO4zldcQc4Bi9iVLUCCsqNY0b4WXVV4UB+wbWENA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- link css -->
+  <link rel="stylesheet" href="./css/output.css" />
+</head>
+
+<body class="bg-white dark:bg-[#020713] relative box-border overflow-x-hidden">
+  <header id="navbar" class="fixed top-0 left-0 z-50 w-full">
+    <nav id="navbar-content"
+      class="wrapper flex items-center justify-between gap-2 py-4 border-b border-b-gray-200 dark:border-b-gray-800 bg-white dark:bg-[#061223]">
+      <div id="nav-left" class="flex items-center sm:flex-row flex-col">
+        <a href="">
+          <img src="./img/light-logo.png" class="w-full inline-block dark:hidden" />
+          <img src="./img/dark-logo.png" class="w-full hidden dark:inline-block" />
+        </a>
+        <span class="h-0.5 w-12 sm:h-9 sm:w-1 bg-gray-300"></span>
+        <span class="text-xs sm:text-sm font-medium pt-3 px-0 sm:pt-0 sm:pl-3 uppercase tracking-widest">Quản trị
+          viên</span>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-5 sm:py-10">
-        <div class="card min-h-48">
-          <div class="flex items-center justify-between">
-            <span class="text-gray-500">Số hãng</span>
-            <span class="icon w-10 h-10"><i class="fa-solid fa-mobile" style="color: white"></i></span>
-          </div>
-          <div class="card-figure">
-            <span id="total-types"></span>
-            <div class="loading-target hidden"><span class="spinner"></span></div>
-          </div>
+      <div id="nav-right" class="flex items-center gap-2 sm:gap-7">
+        <button id="theme-toggle"
+          class="cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-950 hover:rounded-full hover:rotate-35 w-11 h-11 duration-300">
+          <span class="dark:hidden"><i class="fa-regular fa-moon fa-flip-horizontal fa-xl"
+              style="color: midnightblue"></i></span>
+          <span class="hidden dark:flex dark:items-center dark:justify-center"><svg xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-7 h-7">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="4"></line>
+              <line x1="12" y1="20" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"></line>
+              <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="4" y2="12"></line>
+              <line x1="20" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"></line>
+              <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"></line>
+            </svg></span>
+        </button>
+        <button onclick="window.location.href = '../index.html'" class="info-btn px-6 py-2 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+            class="w-4 h-4">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+          </svg>
+          <span class="hidden lg:inline-block">Trang người dùng</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+  <main class="wrapper pt-36 pb-18 lg:pt-40 lg:pb-20">
+    <div>
+      <h1 class="text-3xl font-bold">Bảng điều khiển</h1>
+      <p class="italic text-gray-500 pt-2">Quản lý kho sản phẩm - kết nối realtime với MockAPI</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-5 sm:py-10">
+      <div class="card min-h-48">
+        <div class="flex items-center justify-between">
+          <span class="text-gray-500">Số hãng</span>
+          <span class="icon w-10 h-10"><i class="fa-solid fa-mobile" style="color: white"></i></span>
         </div>
-        <div class="card min-h-48">
-          <div class="flex items-center justify-between">
-            <span class="text-gray-500">Tổng số máy</span>
-            <span class="icon w-10 h-10"><i class="fa-solid fa-box-archive" style="color: white"></i></span>
-          </div>
-          <div class="card-figure">
-            <span id="total-quantity"></span>
-            <div class="loading-target hidden"><span class="spinner"></span></div>
-          </div>
-        </div>
-        <div class="card min-h-48">
-          <div class="flex items-center justify-between">
-            <span class="text-gray-500">Sản phẩm đắt nhất</span>
-            <span class="icon w-10 h-10"><i class="fa-solid fa-dollar-sign" style="color: white"></i></span>
-          </div>
-          <div>
-            <p id="max-price-value" class="card-figure"></p>
-            <p id="max-price-name" class="text-gray-500"></p>
-            <div class="loading-target hidden"><span class="spinner"></span></div>
-          </div>
+        <div class="card-figure">
+          <span id="total-types"></span>
+          <div class="loading-target hidden"><span class="spinner"></span></div>
         </div>
       </div>
-      <div class="flex items-center justify-between gap-4">
-        <div class="input-box shadow-lg sm:shadow-xl/30 shadow-blue-900 flex flex-1 justify-between">
-          <input type="text" class="outline-none w-full" placeholder="Tìm theo tên hoặc ID..." id="search-input" />
-          <button type="submit" id="search-btn" class="cursor-pointer"><i class="fa fa-search"></i></button>
+      <div class="card min-h-48">
+        <div class="flex items-center justify-between">
+          <span class="text-gray-500">Tổng số máy</span>
+          <span class="icon w-10 h-10"><i class="fa-solid fa-box-archive" style="color: white"></i></span>
+        </div>
+        <div class="card-figure">
+          <span id="total-quantity"></span>
+          <div class="loading-target hidden"><span class="spinner"></span></div>
+        </div>
+      </div>
+      <div class="card min-h-48">
+        <div class="flex items-center justify-between">
+          <span class="text-gray-500">Sản phẩm đắt nhất</span>
+          <span class="icon w-10 h-10"><i class="fa-solid fa-dollar-sign" style="color: white"></i></span>
         </div>
         <div>
-          <button id="add-new-product" class="info-btn px-6 py-2">+ Thêm sản phẩm</button>
+          <p id="max-price-value" class="card-figure"></p>
+          <p id="max-price-name" class="text-gray-500"></p>
+          <div class="loading-target hidden"><span class="spinner"></span></div>
         </div>
       </div>
-      <div class="py-5 sm:py-10">
-        <div class="card overflow-hidden">
-          <table
-            class="w-full table-fixed border-collapse text-left [&_th]:p-4 [&_td]:p-4 [&_tr]:hover:bg-blue-50 [&_tr]:dark:hover:bg-[#091c35]"
-          >
-            <thead>
-              <tr>
-                <th>
-                  <span class="mr-1">ID</span>
-                  <span class="sort-up"><i class="fa fa-arrow-up"></i></span>
-                  <span class="sort-down"><i class="fa fa-arrow-down"></i></span>
-                </th>
-                <th>Hình ảnh</th>
-                <th>
-                  <span class="mr-1">Tên</span>
-                  <span class="sort-up"><i class="fa fa-arrow-up"></i></span>
-                  <span class="sort-down"><i class="fa fa-arrow-down"></i></span>
-                </th>
-                <th>Loại</th>
-                <th>
-                  <span class="mr-1">Giá</span>
-                  <span class="sort-up"><i class="fa fa-arrow-up"></i></span>
-                  <span class="sort-down"><i class="fa fa-arrow-down"></i></span>
-                </th>
-                <th>
-                  <span class="mr-1">Số lượng</span>
-                  <span class="sort-up"><i class="fa fa-arrow-up"></i></span>
-                  <span class="sort-down"><i class="fa fa-arrow-down"></i></span>
-                </th>
-                <th>Hành động</th>
-              </tr>
-            </thead>
-            <tbody
-              id="product-table-list"
-              class="border-t border-gray-200 dark:border-gray-800 divide-y divide-gray-200 dark:divide-gray-800"
-            >
-              <tr>
-                <td colspan="7" class="loading-target"><span class="spinner mt-6 mx-auto"></span></td>
-              </tr>
-              <!-- render list sản phẩm -->
-            </tbody>
-          </table>
-        </div>
+    </div>
+    <div class="flex items-center justify-between gap-4">
+      <div class="input-box shadow-lg sm:shadow-xl/30 shadow-blue-900 flex flex-1 justify-between">
+        <input type="text" class="outline-none w-full" placeholder="Tìm theo tên hoặc ID..." id="search-input" />
+        <button type="submit" id="search-btn" class="cursor-pointer"><i class="fa fa-search"></i></button>
       </div>
-      <!-- modal -->
-      <div
-        id="modal-overlay"
-        class="hidden fixed inset-0 z-60 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4"
-      >
-        <div id="modal" class="hidden card no-scrollbar w-3/5 max-h-9/10">
-          <h1 id="modal-title" class="text-3xl font-semibold">Thêm sản phẩm mới</h1>
-          <form id="product-form" class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 py-6">
-            <div class="form-input col-span-2">
-              <label>Tên</label>
-              <input type="text" id="product-name" class="input-box" />
-              <span class="err-msg" id="name-error"></span>
-            </div>
-            <div class="form-input">
-              <label>Loại / Hãng</label>
-              <input type="text" id="product-type" class="input-box" placeholder="Vd: samsung / iphone ..." />
-              <span class="err-msg" id="type-error"></span>
-            </div>
-            <div class="form-input">
-              <label>Số lượng</label>
-              <div class="flex items-center gap-2">
-                <button id="minus-quantity" type="button" class="icon w-6 h-6 cursor-pointer">
-                  <i class="fa-solid fa-minus fa-xs" style="color: white"></i>
-                </button>
-                <input type="number" id="product-quantity" class="input-box flex-1 w-full hide-arrows" />
-                <button id="plus-quantity" type="button" class="icon w-6 h-6 cursor-pointer">
-                  <i class="fa-solid fa-plus fa-xs" style="color: white"></i>
-                </button>
-              </div>
-              <span class="err-msg" id="quantity-error"></span>
-            </div>
-            <div class="form-input">
-              <label>Giá (VND)</label>
-              <input type="number" id="product-price" class="input-box hide-arrows" />
-              <span class="err-msg" id="price-error"></span>
-            </div>
-            <div class="form-input">
-              <label>Màn hình</label>
-              <input type="text" id="product-screen" class="input-box" placeholder="Vd: 6.1 AMOLED ..." />
-              <span class="err-msg" id="screen-error"></span>
-            </div>
-            <div class="form-input">
-              <label>Camera sau</label>
-              <input type="text" id="product-back-camera" class="input-box" placeholder="Vd: 50 MP ..." />
-              <span class="err-msg" id="back-camera-error"></span>
-            </div>
-            <div class="form-input">
-              <label>Camera trước</label>
-              <input type="text" id="product-front-camera" class="input-box" placeholder="Vd: 12 MP ..." />
-              <span class="err-msg" id="front-camera-error"></span>
-            </div>
-            <div class="form-input col-span-2">
-              <label>Link ảnh</label>
-              <input type="text" id="product-img" class="input-box" placeholder="https:// ..." />
-              <span class="err-msg" id="img-error"></span>
-              <div id="img-preview" class="input-box flex items-center gap-4 py-7 mt-3">
-                <span>Preview:</span>
-                <img src="" alt="preview" class="h-6 w-6 object-cover" />
-              </div>
-            </div>
-            <div class="form-input col-span-2">
-              <label>Mô tả</label>
-              <textarea
-                id="product-desc"
-                rows="3"
-                class="input-box no-scrollbar resize-none py-2"
-                placeholder="Vd: Flagship có hiệu năng cực khủng, camera sắc nét ..."
-              ></textarea>
-              <span class="err-msg" id="desc-error"></span>
-            </div>
-          </form>
-          <div class="col-span-2 flex justify-end gap-3">
-            <button id="add-btn" type="button" class="info-btn px-6 py-2">Thêm</button>
-            <button id="update-btn" type="button" class="info-btn px-6 py-2">Cập nhật</button>
-            <button id="reset-btn" type="button" class="info-btn px-6 py-2">Reset</button>
-            <button id="cancel-btn" type="button" class="danger-btn px-6 py-2">Huỷ</button>
+      <div>
+        <button id="add-new-product" class="info-btn px-6 py-2">+ Thêm sản phẩm</button>
+      </div>
+    </div>
+    <div class="py-5 sm:py-10">
+      <div class="card overflow-hidden">
+        <table
+          class="w-full table-fixed border-collapse text-left [&_th]:p-4 [&_td]:p-4 [&_tr]:hover:bg-blue-50 [&_tr]:dark:hover:bg-[#091c35]">
+          <thead>
+            <tr>
+              <th>
+                <span class="mr-1">ID</span>
+                <span class="sort-up"><i class="fa fa-arrow-up"></i></span>
+                <span class="sort-down"><i class="fa fa-arrow-down"></i></span>
+              </th>
+              <th>Hình ảnh</th>
+              <th>
+                <span class="mr-1">Tên</span>
+                <span class="sort-up"><i class="fa fa-arrow-up"></i></span>
+                <span class="sort-down"><i class="fa fa-arrow-down"></i></span>
+              </th>
+              <th>Loại</th>
+              <th>
+                <span class="mr-1">Giá</span>
+                <span class="sort-up"><i class="fa fa-arrow-up"></i></span>
+                <span class="sort-down"><i class="fa fa-arrow-down"></i></span>
+              </th>
+              <th>
+                <span class="mr-1">Số lượng</span>
+                <span class="sort-up"><i class="fa fa-arrow-up"></i></span>
+                <span class="sort-down"><i class="fa fa-arrow-down"></i></span>
+              </th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody id="product-table-list"
+            class="border-t border-gray-200 dark:border-gray-800 divide-y divide-gray-200 dark:divide-gray-800">
+            <tr>
+              <td colspan="7" class="loading-target"><span class="spinner mt-6 mx-auto"></span></td>
+            </tr>
+            <!-- render list sản phẩm -->
+          </tbody>
+        </table>
+        <div id="pagination" class="flex justify-center gap-2 mt-4"></div>
+      </div>
+    </div>
+    <!-- modal -->
+    <div id="modal-overlay"
+      class="hidden fixed inset-0 z-60 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+      <div id="modal" class="hidden card no-scrollbar w-3/5 max-h-9/10">
+        <h1 id="modal-title" class="text-3xl font-semibold">Thêm sản phẩm mới</h1>
+        <form id="product-form" class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 py-6">
+          <div class="form-input col-span-2">
+            <label>Tên</label>
+            <input type="text" id="product-name" class="input-box" />
+            <span class="err-msg" id="name-error"></span>
           </div>
+          <div class="form-input">
+            <label>Loại / Hãng</label>
+            <input type="text" id="product-type" class="input-box" placeholder="Vd: samsung / iphone ..." />
+            <span class="err-msg" id="type-error"></span>
+          </div>
+          <div class="form-input">
+            <label>Số lượng</label>
+            <div class="flex items-center gap-2">
+              <button id="minus-quantity" type="button" class="icon w-6 h-6 cursor-pointer">
+                <i class="fa-solid fa-minus fa-xs" style="color: white"></i>
+              </button>
+              <input type="number" id="product-quantity" class="input-box flex-1 w-full hide-arrows" />
+              <button id="plus-quantity" type="button" class="icon w-6 h-6 cursor-pointer">
+                <i class="fa-solid fa-plus fa-xs" style="color: white"></i>
+              </button>
+            </div>
+            <span class="err-msg" id="quantity-error"></span>
+          </div>
+          <div class="form-input">
+            <label>Giá (VND)</label>
+            <input type="number" id="product-price" class="input-box hide-arrows" />
+            <span class="err-msg" id="price-error"></span>
+          </div>
+          <div class="form-input">
+            <label>Màn hình</label>
+            <input type="text" id="product-screen" class="input-box" placeholder="Vd: 6.1 AMOLED ..." />
+            <span class="err-msg" id="screen-error"></span>
+          </div>
+          <div class="form-input">
+            <label>Camera sau</label>
+            <input type="text" id="product-back-camera" class="input-box" placeholder="Vd: 50 MP ..." />
+            <span class="err-msg" id="back-camera-error"></span>
+          </div>
+          <div class="form-input">
+            <label>Camera trước</label>
+            <input type="text" id="product-front-camera" class="input-box" placeholder="Vd: 12 MP ..." />
+            <span class="err-msg" id="front-camera-error"></span>
+          </div>
+          <div class="form-input col-span-2">
+            <label>Link ảnh</label>
+            <input type="text" id="product-img" class="input-box" placeholder="https:// ..." />
+            <span class="err-msg" id="img-error"></span>
+            <div id="img-preview" class="input-box flex items-center gap-4 py-7 mt-3">
+              <span>Preview:</span>
+              <img src="" alt="preview" class="h-6 w-6 object-cover" />
+            </div>
+          </div>
+          <div class="form-input col-span-2">
+            <label>Mô tả</label>
+            <textarea id="product-desc" rows="3" class="input-box no-scrollbar resize-none py-2"
+              placeholder="Vd: Flagship có hiệu năng cực khủng, camera sắc nét ..."></textarea>
+            <span class="err-msg" id="desc-error"></span>
+          </div>
+        </form>
+        <div class="col-span-2 flex justify-end gap-3">
+          <button id="add-btn" type="button" class="info-btn px-6 py-2">Thêm</button>
+          <button id="update-btn" type="button" class="info-btn px-6 py-2">Cập nhật</button>
+          <button id="reset-btn" type="button" class="info-btn px-6 py-2">Reset</button>
+          <button id="cancel-btn" type="button" class="danger-btn px-6 py-2">Huỷ</button>
         </div>
       </div>
-    </main>
-    <script type="module" src="./admin.js"></script>
-  </body>
+    </div>
+  </main>
+  <script type="module" src="./admin.js"></script>
+</body>
+
 </html>
