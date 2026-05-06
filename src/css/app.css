@@ -1,40 +1,38 @@
+/* ================= BASE COMPONENT ================= */
 @layer components {
-  /* Nút bấm chính */
   .btn-primary {
     @apply bg-blue-600 text-white px-4 py-2 rounded-xl font-bold hover:bg-blue-700 transition-all duration-300 active:scale-95;
   }
 
-  /* Nút bấm phụ */
   .btn-secondary {
     @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-xl font-medium hover:bg-gray-200 transition-all;
   }
 
-  /* Ô nhập liệu */
   .input-base {
     @apply w-full bg-gray-50 border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-blue-500 transition-all;
   }
 
-  /* Thẻ sản phẩm */
   .product-card {
     @apply bg-white rounded-2xl shadow-sm hover:shadow-xl p-5 transition-all duration-300 flex flex-col border border-gray-100;
   }
 
-  /* Overlay cho Modal */
   .modal-overlay {
     @apply absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity;
   }
 
-  /* Khung nội dung Modal */
   .modal-content {
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] max-w-lg bg-white rounded-3xl shadow-2xl p-6 md:p-8;
   }
 }
 
+/* ================= SWIPER ================= */
 .myBanner {
   width: 100%;
-  height: 450px; /* Độ cao banner giống mẫu */
+  height: 450px;
 }
-
+.dark .btn-primary:active {
+  transform: none;
+}
 @media (max-width: 768px) {
   .myBanner {
     height: 250px;
@@ -42,57 +40,110 @@
 }
 
 .swiper-slide img {
-  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  object-fit: cover;
 }
 
-/* Hiệu ứng bo tròn của Swiper */
 .swiper-pagination-bullet-active {
-  background: #2563eb !important; /* Màu xanh PhoneStore */
+  background: #2563eb !important;
   width: 20px !important;
   border-radius: 5px !important;
 }
+/* ===== RESPONSIVE FIX ===== */
 
-/* Navbar blur effect */
+/* container mobile gọn hơn */
+.container {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* scroll ngang brand */
+#brandFilterContainer::-webkit-scrollbar {
+  display: none;
+}
+
+/* swiper mobile thấp lại */
+@media (max-width: 768px) {
+  .myBanner {
+    height: 180px !important;
+  }
+}
+
+/* fix ảnh không bị méo */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* tránh overflow ngang */
+body {
+  overflow-x: hidden;
+}
+
+/* text nhỏ lại trên mobile */
+@media (max-width: 640px) {
+  h2 {
+    font-size: 18px;
+  }
+}
+
+/* giảm padding mobile */
+@media (max-width: 768px) {
+  .p-12 {
+    padding: 20px !important;
+  }
+}
+/* ================= NAV ================= */
 nav {
   transition: all 0.3s ease;
 }
+
+/* ================= BRAND TAB ================= */
 .brand-tab {
   @apply px-6 py-2 rounded-full border border-gray-100 bg-white text-gray-700 
-    font-medium transition-all duration-300 hover:bg-gray-50 shadow-sm;
-}
+    font-medium shadow-sm;
 
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+.banner-card {
+  @apply rounded-[2rem] overflow-hidden shadow-xl flex flex-col h-full;
+}
 .brand-tab.active {
   @apply bg-blue-900 border-blue-900 text-white shadow-md;
 }
-/* Container chứa các thông báo */
+
+/* ================= TOAST ================= */
 #toast-container {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 9999;
 }
-
+.banner-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* không méo */
+}
 .toast-item {
   background: white;
   color: #1a1a1a;
   padding: 16px 24px;
   border-radius: 12px;
   box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    0 10px 15px rgba(0, 0, 0, 0.1),
+    0 4px 6px rgba(0, 0, 0, 0.05);
   margin-bottom: 10px;
-  border-left: 5px solid #1e3a8a; /* Màu xanh của PhoneHub */
+  border-left: 5px solid #1e3a8a;
   display: flex;
-  align-items: center;
   gap: 12px;
   font-weight: 600;
   font-size: 14px;
   animation:
-    slideIn 0.3s ease-out,
-    fadeOut 0.5s ease-in 2.5s forwards;
+    slideIn 0.3s ease,
+    fadeOut 0.5s ease 2.5s forwards;
 }
 
 @keyframes slideIn {
@@ -111,4 +162,166 @@ nav {
     opacity: 0;
     transform: translateY(-20px);
   }
+}
+
+/* ================= DARK MODE ================= */
+.dark {
+  background: #020617;
+  color: #e2e8f0;
+}
+html:not(.dark) {
+  background: #f8fafc;
+  color: #0f172a;
+}
+/* ===== LIGHT MODE (mặc định) ===== */
+body {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* CARD */
+.mode {
+  background: #e2e8f0 !important;
+}
+
+/* BRAND TAB */
+.brand-tab {
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+}
+
+.brand-tab.active {
+  background: #1e3a8a;
+  color: #fff;
+}
+
+/* INPUT */
+input,
+select {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+}
+
+/* TEXT */
+.text-gray-700 {
+  color: #334155 !important;
+}
+/* NAVBAR */
+.dark nav {
+  background: linear-gradient(90deg, #020617, #0f172a);
+  border-bottom: 1px solid #1e293b;
+}
+
+/* CARD + BOX */
+.dark .bg-white,
+.dark .bg-gray-50 {
+  background: #020617 !important;
+  border: 1px solid #1e293b;
+}
+
+.dark .rounded-3xl,
+.dark .rounded-\[2rem\],
+.dark .rounded-\[3rem\] {
+  background: linear-gradient(145deg, #020617, #0f172a);
+  border: 1px solid #1e293b;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* TEXT */
+.dark .text-gray-900 {
+  color: #f1f5f9 !important;
+}
+
+.dark .text-gray-700,
+.dark .text-gray-600 {
+  color: #94a3b8 !important;
+}
+
+/* INPUT */
+.dark input,
+.dark textarea,
+.dark select {
+  background: #020617 !important;
+  border: 1px solid #1e293b !important;
+  color: #e2e8f0 !important;
+}
+
+.dark input::placeholder {
+  color: #64748b;
+}
+
+/* BUTTON */
+.dark .bg-blue-600 {
+  background: linear-gradient(90deg, #2563eb, #3b82f6) !important;
+}
+
+.dark .bg-blue-900 {
+  background: linear-gradient(90deg, #1e3a8a, #2563eb) !important;
+}
+
+/* BORDER */
+.dark .border,
+.dark .border-gray-100,
+.dark .border-gray-200 {
+  border-color: #1e293b !important;
+}
+
+/* TABLE */
+.dark table {
+  background: #020617;
+}
+
+.dark td {
+  border-top: 1px solid #1e293b;
+}
+
+/* ================= FIX FILTER BAR ================= */
+
+/* TAB */
+.dark .brand-tab {
+  background: #ffffff !important;
+  color: #020617 !important;
+  border: 1px solid #cbd5e1;
+}
+
+.dark .brand-tab:hover {
+  background: #f1f5f9 !important;
+}
+
+/* ACTIVE TAB */
+.dark .brand-tab.active {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border: none;
+}
+
+/* SELECT + INPUT */
+.dark #sortProduct,
+.dark #searchInput {
+  background: #ffffff !important;
+  color: #020617 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+.dark #searchInput::placeholder {
+  color: #64748b !important;
+}
+
+/* ================= SCROLL ================= */
+.dark ::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 10px;
+}
+
+/* ================= TRANSITION ================= */
+body {
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
