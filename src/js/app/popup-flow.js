@@ -1,9 +1,6 @@
 // src/js/app/popup.js
 import { el } from "./core.js";
 
-/**
- * Hàm đóng Popup Chi tiết sản phẩm
- */
 export const closePopupChiTiet = () => {
     if (el.popup) {
         el.popup.classList.add("hidden");
@@ -11,9 +8,6 @@ export const closePopupChiTiet = () => {
     }
 };
 
-/**
- * Hàm đóng Popup Giỏ hàng
- */
 export const closePopupGioHang = () => {
     if (el.popupGioHang) {
         el.popupGioHang.classList.add("hidden");
@@ -21,9 +15,6 @@ export const closePopupGioHang = () => {
     }
 };
 
-/**
- * Hàm tổng hợp các sự kiện cho Popup
- */
 export const popupEvents = () => {
     // 1. Đóng khi click vào Overlay
     if (el.overlay) el.overlay.addEventListener("click", closePopupChiTiet);
@@ -37,12 +28,4 @@ export const popupEvents = () => {
         }
     });
 
-    // 3. Nếu Huy có nút close (X) trong HTML, có thể thêm vào đây
-    const closeBtns = document.querySelectorAll(".btn-close-popup");
-    closeBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            closePopupChiTiet();
-            closePopupGioHang();
-        });
-    });
 };

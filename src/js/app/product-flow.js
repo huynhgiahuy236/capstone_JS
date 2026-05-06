@@ -55,11 +55,11 @@ export const renderDanhSachSP = (danhSach) => {
         const isOutOfStock = quantity <= 0 || isNaN(quantity);
 
         return `
-        <div class="product-card group bg-white p-4 rounded-3xl border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col ${isOutOfStock ? 'opacity-75' : ''}">
+        <div class="product-card group bg-white p-8 rounded-3xl border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col ${isOutOfStock ? 'opacity-75' : ''}">
             <!-- Hình ảnh -->
             <div class="relative overflow-hidden rounded-2xl mb-4 bg-gray-50 flex items-center justify-center h-56 p-6">
                 <img src="${phone.img}" 
-                     class="w-full h-full object-contain transition-transform duration-700 ${isOutOfStock ? 'blur-[1px] grayscale' : 'group-hover:scale-110'}" 
+                     class="w-[80%] object-contain transition-transform duration-700 ${isOutOfStock ? 'blur-[1px] grayscale' : 'group-hover:scale-110'}" 
                      alt="${phone.name}">
                 
                 <span class="absolute top-3 left-3 bg-blue-900/90 backdrop-blur-sm text-white text-[10px] font-black px-3 py-1 rounded-full shadow-sm uppercase tracking-wider">
@@ -77,14 +77,14 @@ export const renderDanhSachSP = (danhSach) => {
 
             <!-- Thông tin sản phẩm -->
             <div class="flex flex-col flex-1">
-                <h3 class="font-bold text-gray-800 text-lg mb-1 truncate ${!isOutOfStock ? 'group-hover:text-blue-900' : ''} transition-colors">
+                <h3 class="font-bold text-gray-800 text-lg lg:text-xl mb-2 truncate ${!isOutOfStock ? 'group-hover:text-blue-900' : ''} transition-colors">
                     ${phone.name}
                 </h3>
                 
                 <div class="flex justify-between items-end mb-4">
                     <div>
-                        <p class="text-blue-900 font-black text-xl leading-none mb-1">
-                            ${Number(phone.price).toLocaleString()} <span class="text-xs font-normal text-gray-400">₫</span>
+                        <p class="text-blue-900 font-black text-xl leading-none mb-2">
+                            ${Number(phone.price).toLocaleString()} <span class="text-xs font-normal text-gray-400">VND</span>
                         </p>
                         <!-- Hiển thị số lượng kho -->
                         <p class="text-[10px] font-bold ${isOutOfStock ? 'text-red-500' : 'text-gray-400'} uppercase tracking-tight">

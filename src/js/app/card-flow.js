@@ -87,6 +87,7 @@ el.noiDungGioHang.addEventListener("click", (e) => {
     }
 
     if (e.target.classList.contains("xoa")) {
+        confirm("Bạn có chắc xóa sản phẩm chứ")
         state.gioHang = state.gioHang.filter(p => p.id != id);
     }
 
