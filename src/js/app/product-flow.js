@@ -59,7 +59,7 @@ export const renderDanhSachSP = (danhSach) => {
             <!-- Hình ảnh -->
             <div class="relative overflow-hidden rounded-2xl mb-4 bg-gray-50 flex items-center justify-center h-56 p-6">
                 <img src="${phone.img}" 
-                     class="w-[80%] object-contain transition-transform duration-700 ${isOutOfStock ? 'blur-[1px] grayscale' : 'group-hover:scale-110'}" 
+                     class="w-[80%] object-contain transition-transform duration-700 ${isOutOfStock ? 'blur-[1px] grayscale' : 'group-hover:scale-110'} " 
                      alt="${phone.name}">
                 
                 <span class="absolute top-3 left-3 bg-blue-900/90 backdrop-blur-sm text-white text-[10px] font-black px-3 py-1 rounded-full shadow-sm uppercase tracking-wider">
@@ -77,7 +77,7 @@ export const renderDanhSachSP = (danhSach) => {
 
             <!-- Thông tin sản phẩm -->
             <div class="flex flex-col flex-1">
-                <h3 class="font-bold text-gray-800 text-lg lg:text-xl mb-2 truncate ${!isOutOfStock ? 'group-hover:text-blue-900' : ''} transition-colors">
+                <h3 class="font-bold text-gray-800 text-lg lg:text-xl mb-2 truncate ${!isOutOfStock ? 'group-hover:text-blue-900' : ''} transition-colors dark:text-white">
                     ${phone.name}
                 </h3>
                 
@@ -96,7 +96,7 @@ export const renderDanhSachSP = (danhSach) => {
                 
                 <!-- Bộ nút chức năng -->
                 <div class="grid grid-cols-2 gap-2 mt-auto">
-                    <button class="py-2.5 rounded-xl border border-gray-200 text-gray-700 text-xs font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2" 
+                    <button class="py-2.5 rounded-xl border border-gray-200 text-green-700 text-xs font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2" 
                             onclick="xemNhanhSanPham('${phone.id}')">
                         <i class="fa-solid fa-expand"></i> Chi tiết
                     </button>

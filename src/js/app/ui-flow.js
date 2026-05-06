@@ -73,5 +73,5 @@ document.addEventListener("DOMContentLoaded", () => {
 const btn = document.getElementById("toggleTheme");
 
 btn.onclick = () => {
-  document.documentElement.classList.toggle("dark");
+    document.documentElement.classList.toggle("dark");
 };
