@@ -167,7 +167,6 @@ nav {
 /* ================= DARK MODE ================= */
 .dark {
   background: #020617;
-  color: #e2e8f0;
 }
 html:not(.dark) {
   background: #f8fafc;
@@ -176,7 +175,6 @@ html:not(.dark) {
 /* ===== LIGHT MODE (mặc định) ===== */
 body {
   background: #f8fafc;
-  color: #0f172a;
 }
 
 /* CARD */
@@ -205,8 +203,8 @@ select {
 }
 
 /* TEXT */
-.text-gray-700 {
-  color: #334155 !important;
+.dark .text-gray-700 {
+  color: white !important;
 }
 /* NAVBAR */
 .dark nav {
@@ -227,16 +225,6 @@ select {
   background: linear-gradient(145deg, #020617, #0f172a);
   border: 1px solid #1e293b;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-}
-
-/* TEXT */
-.dark .text-gray-900 {
-  color: #f1f5f9 !important;
-}
-
-.dark .text-gray-700,
-.dark .text-gray-600 {
-  color: #94a3b8 !important;
 }
 
 /* INPUT */
