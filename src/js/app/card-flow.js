@@ -77,17 +77,22 @@ el.noiDungGioHang.addEventListener("click", (e) => {
     const item = state.gioHang.find(i => i.id == id);
     const spGoc = state.danhSachSP.find(p => p.id == id);
 
-    if (e.target.classList.contains("tang")) {
+    // ================= TĂNG =================
+    if (e.target.closest(".tang")) {
         if (item.soLuong < spGoc.quantity) item.soLuong++;
         else showToast("Vượt quá tồn kho", "fa-warning");
     }
 
-    if (e.target.classList.contains("giam") && item.soLuong > 1) {
+    // ================= GIẢM =================
+    if (e.target.closest(".giam") && item.soLuong > 1) {
         item.soLuong--;
     }
 
-    if (e.target.classList.contains("xoa")) {
-        confirm("Bạn có chắc xóa sản phẩm chứ")
+    // ================= XÓA =================
+    if (e.target.closest(".xoa")) {
+        const ok = confirm("Bạn có chắc muốn xóa sản phẩm?");
+        if (!ok) return;
+
         state.gioHang = state.gioHang.filter(p => p.id != id);
     }
 
