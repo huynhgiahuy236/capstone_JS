@@ -1,4 +1,5 @@
 import { el, state, API_URL } from "./core.js";
+import { renderBrandFilter } from "./filter-flow.js";
 
 // 1. Hàm lấy danh sách sản phẩm từ API
 export const layDanhSachSP = async () => {
@@ -8,31 +9,21 @@ export const layDanhSachSP = async () => {
         const res = await axios.get(API_URL);
         state.danhSachSP = res.data;
 
-        // Khởi tạo trạng thái ban đầu
         state.currentPage = 1;
         state.danhSachHienThi = res.data;
+
+
+        renderBrandFilter();
 
         renderDanhSachSP(state.danhSachHienThi);
         capNhatSoLuongGioHang();
 
     } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
-        if (el.danhSachSP) {
-            el.danhSachSP.innerHTML = `
-                <div class="text-center col-span-full py-20">
-                    <i class="fa-solid fa-triangle-exclamation text-4xl text-red-500 mb-4"></i>
-                    <p class="text-red-500 font-bold">Không thể tải danh sách sản phẩm. Vui lòng thử lại sau!</p>
-                    <button onclick="location.reload()" 
-                        class="mt-4 px-4 py-2 bg-blue-900 text-white rounded-xl">
-                 Thử lại
-                </button>
-                </div>`;
-        }
     } finally {
         if (el.loading) el.loading.classList.add("hidden");
     }
 };
-
 // 2. Hàm render danh sách sản phẩm 
 export const renderDanhSachSP = (danhSach) => {
     state.danhSachHienThi = danhSach;

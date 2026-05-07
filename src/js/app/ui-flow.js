@@ -1,3 +1,5 @@
+import { el } from "./core.js";
+
 // ===== 1. SLIDER =====
 export const initSlider = () => {
     const el = document.querySelector(".myBanner");
@@ -34,7 +36,6 @@ export const initSearchFlow = () => {
 
         target?.scrollIntoView({ behavior: "smooth" });
 
-        window.thucHienFilterTongHop?.(); // gọi nếu tồn tại
         input.blur();
     };
 
@@ -44,7 +45,7 @@ export const initSearchFlow = () => {
 
 // ===== 3. DARK MODE =====
 export const initDarkMode = () => {
-    const btn = document.getElementById("toggleTheme");
+    const btn = el.toggleTheme
     if (!btn) return;
 
     const root = document.documentElement;
@@ -70,8 +71,5 @@ document.addEventListener("DOMContentLoaded", () => {
     initSearchFlow();
     initDarkMode();
 });
-const btn = document.getElementById("toggleTheme");
 
-btn.onclick = () => {
-    document.documentElement.classList.toggle("dark");
-};
+initDarkMode()
