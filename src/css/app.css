@@ -1,134 +1,240 @@
-/* ================= BASE COMPONENT ================= */
-@layer components {
-  .btn-primary {
-    @apply bg-blue-600 text-white px-4 py-2 rounded-xl font-bold hover:bg-blue-700 transition-all duration-300 active:scale-95;
-  }
+/* ============================================================
+   PHONEHUB — app.css
+   1. CSS Variables (Light / Dark)
+   2. Base Reset
+   3. Components (@layer)
+   4. Layout & Sections
+   5. Swiper
+   6. Brand Tab
+   7. Toast
+   8. Dark Mode overrides
+   9. Media Queries
+   ============================================================ */
 
+/* ── 1. CSS VARIABLES ── */
+:root {
+  --bg-page: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --text-base: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.07);
+  --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.1);
+  --brand-primary: #1e3a8a;
+  --brand-accent: #2563eb;
+  --transition: 0.3s ease;
+}
+
+.dark {
+  --bg-page: #020617;
+  --bg-card: #020617;
+  --bg-input: #ffffff;
+  --text-base: #e2e8f0;
+  --text-muted: #94a3b8;
+  --border-color: #1e293b;
+  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* ── 2. BASE RESET ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-page);
+  color: var(--text-base);
+  overflow-x: hidden;
+  transition:
+    background var(--transition),
+    color var(--transition);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── 3. COMPONENTS ── */
+@layer components {
+  /* — Buttons — */
+  .btn-primary {
+    @apply bg-blue-600 text-white px-4 py-2 rounded-xl font-bold
+           hover:bg-blue-700 active:scale-95 transition-all duration-300;
+  }
   .btn-secondary {
     @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-xl font-medium hover:bg-gray-200 transition-all;
   }
 
-  .input-base {
-    @apply w-full bg-gray-50 border border-gray-200 rounded-xl p-3 outline-none focus:ring-2 focus:ring-blue-500 transition-all;
+  /* — Form input — */
+  .ph-input {
+    @apply w-full rounded-xl p-3 outline-none text-sm font-medium transition-all;
+    background: var(--bg-input);
+    color: var(--text-base);
+    border: 1px solid var(--border-color);
+  }
+  .ph-input:focus {
+    @apply ring-2 ring-blue-500/20 border-blue-500;
+  }
+  .ph-input::placeholder {
+    color: var(--text-muted);
   }
 
+  /* — Product card — */
   .product-card {
-    @apply bg-white rounded-2xl shadow-sm hover:shadow-xl p-5 transition-all duration-300 flex flex-col border border-gray-100;
+    @apply rounded-2xl p-5 flex flex-col border transition-all duration-300;
+    background: var(--bg-card);
+    border-color: var(--border-color);
+    box-shadow: var(--shadow-card);
+  }
+  .product-card:hover {
+    box-shadow: var(--shadow-hover);
   }
 
-  .modal-overlay {
-    @apply absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity;
+  /* — Banner / promo card — */
+  .banner-card {
+    @apply overflow-hidden bg-gray-200 cursor-pointer
+           shadow-sm hover:shadow-2xl transition-all duration-500;
+    border-radius: 2rem;
+  }
+  .banner-card img {
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  .banner-card:hover img {
+    transform: scale(1.08);
   }
 
-  .modal-content {
-    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] max-w-lg bg-white rounded-3xl shadow-2xl p-6 md:p-8;
+  /* — Swiper nav (prev & next dùng chung) — */
+  .swiper-nav-btn {
+    @apply !text-white !w-10 !h-10 bg-black/10 hover:bg-black/30
+           backdrop-blur-sm rounded-full after:!text-sm transition-all;
+  }
+
+  /* — Blog card — */
+  .blog-card {
+    @apply block space-y-4;
+  }
+  .blog-card__thumb {
+    @apply aspect-video overflow-hidden rounded-3xl bg-gray-50;
+  }
+  .blog-card__thumb img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+  .blog-card:hover .blog-card__thumb img {
+    transform: scale(1.05);
+  }
+  .blog-card__title {
+    @apply text-sm font-bold text-gray-700 leading-snug line-clamp-2 transition-colors;
+  }
+  .blog-card:hover .blog-card__title {
+    @apply text-blue-600;
+  }
+
+  /* — Footer info row — */
+  .footer-info-row {
+    @apply flex items-center gap-4 font-medium text-gray-600 dark:text-white;
+  }
+  .footer-info-row i {
+    @apply text-blue-500 w-4 text-center;
+  }
+
+  /* — Popup overlay — */
+  .popup-overlay {
+    @apply fixed inset-0 bg-black/40 backdrop-blur-sm;
   }
 }
 
-/* ================= SWIPER ================= */
-.myBanner {
-  width: 100%;
-  height: 450px;
-}
-.dark .btn-primary:active {
-  transform: none;
-}
-@media (max-width: 768px) {
-  .myBanner {
-    height: 250px;
-  }
-}
-
-.swiper-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.swiper-pagination-bullet-active {
-  background: #2563eb !important;
-  width: 20px !important;
-  border-radius: 5px !important;
-}
-/* ===== RESPONSIVE FIX ===== */
-
-/* container mobile gọn hơn */
+/* ── 4. LAYOUT ── */
 .container {
   padding-left: 12px;
   padding-right: 12px;
 }
 
-/* scroll ngang brand */
+.ph-filter-bar {
+  background: #85aac5;
+}
+.dark .ph-filter-bar {
+  background: #0f172a;
+}
+
+.ph-product-area {
+  background: #e2e8f0;
+}
+.dark .ph-product-area {
+  background: #0f172a;
+}
+
+nav {
+  transition: all var(--transition);
+}
+.dark nav {
+  background: linear-gradient(90deg, #020617, #0f172a);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* ── 5. SWIPER ── */
+.myBanner {
+  width: 100%;
+  height: 450px;
+}
+.swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.swiper-pagination-bullet-active {
+  background: #2563eb !important;
+  width: 20px !important;
+  border-radius: 5px !important;
+}
+
+/* ── 6. BRAND TAB ── */
+.brand-tab {
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-input);
+  color: #334155;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    color var(--transition);
+}
+.brand-tab:hover {
+  color: #2563eb;
+}
+.brand-tab.active {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(30, 58, 138, 0.3);
+}
+
+#brandFilterContainer {
+  scrollbar-width: none;
+}
 #brandFilterContainer::-webkit-scrollbar {
   display: none;
 }
 
-/* swiper mobile thấp lại */
-@media (max-width: 768px) {
-  .myBanner {
-    height: 180px !important;
-  }
-}
-
-/* fix ảnh không bị méo */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* tránh overflow ngang */
-body {
-  overflow-x: hidden;
-}
-
-/* text nhỏ lại trên mobile */
-@media (max-width: 640px) {
-  h2 {
-    font-size: 18px;
-  }
-}
-
-/* giảm padding mobile */
-@media (max-width: 768px) {
-  .p-12 {
-    padding: 20px !important;
-  }
-}
-/* ================= NAV ================= */
-nav {
-  transition: all 0.3s ease;
-}
-
-/* ================= BRAND TAB ================= */
-.brand-tab {
-  @apply px-6 py-2 rounded-full border border-gray-100 bg-white text-gray-700 
-    font-medium shadow-sm;
-
-  transition:
-    background 0.2s ease,
-    color 0.2s ease;
-}
-.banner-card {
-  @apply rounded-[2rem] overflow-hidden shadow-xl flex flex-col h-full;
-}
-.brand-tab.active {
-  @apply bg-blue-900 border-blue-900 text-white shadow-md;
-}
-
-/* ================= TOAST ================= */
+/* ── 7. TOAST ── */
 #toast-container {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 9999;
 }
-.banner-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* không méo */
-}
 .toast-item {
-  background: white;
+  background: #ffffff;
   color: #1a1a1a;
   padding: 16px 24px;
   border-radius: 12px;
@@ -136,7 +242,7 @@ nav {
     0 10px 15px rgba(0, 0, 0, 0.1),
     0 4px 6px rgba(0, 0, 0, 0.05);
   margin-bottom: 10px;
-  border-left: 5px solid #1e3a8a;
+  border-left: 5px solid var(--brand-primary);
   display: flex;
   gap: 12px;
   font-weight: 600;
@@ -145,7 +251,6 @@ nav {
     slideIn 0.3s ease,
     fadeOut 0.5s ease 2.5s forwards;
 }
-
 @keyframes slideIn {
   from {
     transform: translateX(100%);
@@ -156,7 +261,6 @@ nav {
     opacity: 1;
   }
 }
-
 @keyframes fadeOut {
   to {
     opacity: 0;
@@ -164,152 +268,76 @@ nav {
   }
 }
 
-/* ================= DARK MODE ================= */
-.dark {
-  background: #020617;
-}
-html:not(.dark) {
-  background: #f8fafc;
-  color: #0f172a;
-}
-/* ===== LIGHT MODE (mặc định) ===== */
-body {
-  background: #f8fafc;
-}
-
-/* CARD */
-.mode {
-  background: #e2e8f0 !important;
-}
-
-/* BRAND TAB */
-.brand-tab {
-  background: #ffffff;
-  color: #334155;
-  border: 1px solid #e2e8f0;
-}
-
-.brand-tab.active {
-  background: #1e3a8a;
-  color: #fff;
-}
-
-/* INPUT */
-input,
-select {
-  background: #ffffff;
-  color: #0f172a;
-  border: 1px solid #e2e8f0;
-}
-
-/* TEXT */
-.dark .text-gray-700 {
-  color: white !important;
-}
-/* NAVBAR */
-.dark nav {
-  background: linear-gradient(90deg, #020617, #0f172a);
-  border-bottom: 1px solid #1e293b;
-}
-
-/* CARD + BOX */
+/* ── 8. DARK MODE ── */
 .dark .bg-white,
 .dark .bg-gray-50 {
   background: #020617 !important;
-  border: 1px solid #1e293b;
+  border: 1px solid var(--border-color);
 }
 
 .dark .rounded-3xl,
 .dark .rounded-\[2rem\],
 .dark .rounded-\[3rem\] {
   background: linear-gradient(145deg, #020617, #0f172a);
-  border: 1px solid #1e293b;
+  border: 1px solid var(--border-color);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
 }
 
-/* INPUT */
-.dark input,
-.dark textarea,
-.dark select {
-  background: #020617 !important;
-  border: 1px solid #1e293b !important;
-  color: #e2e8f0 !important;
-}
-
-.dark input::placeholder {
-  color: #64748b;
-}
-
-/* BUTTON */
 .dark .bg-blue-600 {
   background: linear-gradient(90deg, #2563eb, #3b82f6) !important;
 }
-
 .dark .bg-blue-900 {
   background: linear-gradient(90deg, #1e3a8a, #2563eb) !important;
 }
 
-/* BORDER */
 .dark .border,
 .dark .border-gray-100,
 .dark .border-gray-200 {
-  border-color: #1e293b !important;
+  border-color: var(--border-color) !important;
 }
 
-/* TABLE */
+.dark .text-gray-700 {
+  color: #e2e8f0 !important;
+}
 .dark table {
   background: #020617;
 }
-
 .dark td {
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid var(--border-color);
 }
 
-/* ================= FIX FILTER BAR ================= */
-
-/* TAB */
-.dark .brand-tab {
-  background: #ffffff !important;
-  color: #020617 !important;
-  border: 1px solid #cbd5e1;
+.dark .ph-input {
+  background: var(--bg-input);
+  color: #020617;
+  border-color: #cbd5e1;
+}
+.dark .ph-input::placeholder {
+  color: #64748b;
 }
 
-.dark .brand-tab:hover {
-  background: #f1f5f9 !important;
-}
-
-/* ACTIVE TAB */
-.dark .brand-tab.active {
-  background: #2563eb !important;
-  color: #ffffff !important;
-  border: none;
-}
-
-/* SELECT + INPUT */
-.dark #sortProduct,
-.dark #searchInput {
-  background: #ffffff !important;
-  color: #020617 !important;
-  border: 1px solid #cbd5e1 !important;
-}
-
-.dark #searchInput::placeholder {
-  color: #64748b !important;
-}
-
-/* ================= SCROLL ================= */
 .dark ::-webkit-scrollbar {
   width: 6px;
 }
-
 .dark ::-webkit-scrollbar-thumb {
   background: #1e293b;
   border-radius: 10px;
 }
 
-/* ================= TRANSITION ================= */
-body {
-  transition:
-    background 0.3s ease,
-    color 0.3s ease;
+/* ── 9. MEDIA QUERIES ── */
+@media (max-width: 768px) {
+  .myBanner {
+    height: 180px !important;
+  }
+  .p-12 {
+    padding: 20px !important;
+  }
+  .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}
+@media (max-width: 640px) {
+  h2 {
+    font-size: 18px;
+  }
 }

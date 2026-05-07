@@ -1,291 +1,201 @@
 <!DOCTYPE html>
-<html lang="vi" class="dark">
+<html lang="vi">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="src/img/logo_store.png">
     <title>PhoneHub - Smartphone Đỉnh Cao</title>
-    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <!-- Tailwind Output & App CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="/src/css/output.css">
-
 </head>
 
-<body class="font-sans text-gray-900 bg-gray-50">
+<body>
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 w-full bg-blue-800 backdrop-blur-md z-50 border-b border-gray-100 py-2">
+    <!-- ═══ NAVBAR ═══ -->
+    <nav class="fixed top-0 left-0 w-full bg-blue-800 z-50 border-b border-gray-100 py-2">
         <div class="container mx-auto px-3 md:px-4 h-16 flex items-center justify-between gap-3">
-            <div class="flex items-center space-x-20 ">
+
+            <!-- Logo + Nav links -->
+            <div class="flex items-center space-x-20">
                 <a href="#">
-                    <img src="src/img/light-logo.png" class="w-40 inline-block dark:hidden">
-                    <img src="src/img/dark-logo.png" class="w-40 hidden dark:inline-block">
+                    <img src="src/img/light-logo.png" alt="PhoneHub" class="w-40 inline-block dark:hidden">
+                    <img src="src/img/dark-logo.png" alt="PhoneHub" class="w-40 hidden dark:inline-block">
                 </a>
                 <div class="hidden md:flex space-x-6 font-medium text-sm text-white">
-                    <a href="#sanPham" class="hover:text-blue-600 transition-colors">Sản phẩm</a>
-                    <a href="#uuDai" class="hover:text-blue-600 transition-colors">Ưu đãi</a>
-                    <a href="#blog" class="hover:text-blue-600 transition-colors">Bài viết</a>
-                    <a href="#contact" class="hover:text-blue-600 transition-colors">Liên hệ</a>
+                    <a href="#sanPham" class="link-hover">Sản phẩm</a>
+                    <a href="#uuDai" class="link-hover">Ưu đãi</a>
+                    <a href="#blog" class="link-hover">Bài viết</a>
+                    <a href="#contact" class="link-hover">Liên hệ</a>
                 </div>
             </div>
-            <div class="flex gap-3 md:gap-5 items-center flex-shrink-0  lg:w-1/2 justify-end">
-                <!-- Search Bar -->
-                <div class="hidden lg:block flex-1 max-w-md">
-                    <div class="relative">
-                        <input type="text" id="headerSearchInput"
-                            class="w-full bg-gray-100 border-none rounded-xl pl-10 p-2.5 text-sm focus:ring-2 focus:ring-blue-500/20 transition-all"
-                            placeholder="Tìm kiếm điện thoại...">
-                        <i
-                            class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    </div>
+
+            <!-- Search + Actions -->
+            <div class="flex gap-3 md:gap-5 items-center flex-shrink-0 lg:w-1/2 justify-end">
+                <div class="hidden lg:block flex-1 max-w-md relative">
+                    <input id="headerSearchInput" type="text" class="ph-input pl-10 rounded-xl"
+                        placeholder="Tìm kiếm điện thoại...">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                 </div>
                 <button id="toggleTheme"
-                    class="ml-3 bg-white text-blue-700 px-3 py-2 rounded-4xl font-medium hover:bg-gray-200 transition">
+                    class="ml-3 bg-white text-blue-700 px-3 py-2 rounded-full font-medium hover:bg-gray-200 transition">
                 </button>
-                <!-- Giỏ hàng -->
-                <button id="btnGioHang" class="relative p-2 text-gray-700 hover:text-blue-600 transition">
-                    <div class="items-center gap-2 flex bg-white rounded-xl py-2 px-3">
-                        <i class="fa-solid fa-cart-shopping text-xl font-medium text-blue-700"></i>
+                <button id="btnGioHang" class="relative p-2 hover:text-blue-600 transition">
+                    <div class="flex items-center gap-2 bg-white rounded-xl py-2 px-3">
+                        <i class="fa-solid fa-cart-shopping text-xl text-blue-700"></i>
                         <span class="font-medium text-blue-700">Giỏ hàng</span>
                     </div>
                     <span id="badgeGioHang"
                         class="absolute top-0 right-0 bg-red-500 text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
                 </button>
             </div>
-            <div class="flex items-center justify-center">
-                <a href="/src/admin.html" class="flex items-center gap-2 bg-white dark:bg-slate-900 
-               text-blue-700 dark:text-blue-400 
-               px-4 py-2.5 rounded-xl font-medium text-sm
-               border border-gray-200 dark:border-slate-700
-               shadow-sm hover:shadow-md 
-               hover:bg-gray-100 dark:hover:bg-slate-800
-               transition-all duration-300">
 
-                    <span class="hidden sm:inline">Trang quản trị</span>
-                    <i class="fa-solid fa-user-tie"></i>
-                </a>
-            </div>
+            <!-- Admin link -->
+            <a href="/src/admin.html" class="flex items-center gap-2 bg-white dark:bg-slate-900
+                text-blue-700 dark:text-blue-400
+                px-4 py-2.5 rounded-xl font-medium text-sm
+                border border-gray-200 dark:border-slate-700
+                shadow-sm hover:shadow-md hover:bg-gray-100 dark:hover:bg-slate-800
+                transition-all duration-300">
+                <span class="hidden sm:inline">Trang quản trị</span>
+                <i class="fa-solid fa-user-tie"></i>
+            </a>
+
         </div>
     </nav>
 
-    <!-- Hero Banner Section -->
+    <!-- ═══ HERO BANNER ═══ -->
     <section class="pt-24">
         <div class="container mx-auto px-4">
-            <div class="swiper myBanner rounded-[32px] overflow-hidden shadow-xl aspect-[21/9] sm:aspect-[25/9]">
+            <div class="swiper myBanner rounded-[32px] overflow-hidden shadow-xl">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="src/img/banner_1.png" alt="Banner 1"
-                            class="w-full h-full object-cover"></div>
-                    <div class="swiper-slide"><img src="src/img/banner_2.jpg" alt="Banner 2"
-                            class="w-full h-full object-cover"></div>
-                    <div class="swiper-slide"><img src="src/img/banner_3.jpg" alt="Banner 3"
-                            class="w-full h-full object-cover"></div>
-                    <div class="swiper-slide"><img src="src/img/banner_4.webp" alt="Banner 4"
-                            class="w-full h-full object-cover"></div>
-                    <div class="swiper-slide"><img src="src/img/banner-7.webp" alt="Banner 5"
-                            class="w-full h-full object-cover"></div>
-                    <div class="swiper-slide"><img src="src/img/banner_5.jpg" alt="Banner 6"
-                            class="w-full h-full object-cover"></div>
+                    <div class="swiper-slide"><img src="src/img/banner_1.png" alt="Banner 1"></div>
+                    <div class="swiper-slide"><img src="src/img/banner_2.jpg" alt="Banner 2"></div>
+                    <div class="swiper-slide"><img src="src/img/banner_3.jpg" alt="Banner 3"></div>
+                    <div class="swiper-slide"><img src="src/img/banner_4.webp" alt="Banner 4"></div>
+                    <div class="swiper-slide"><img src="src/img/banner-7.webp" alt="Banner 5"></div>
+                    <div class="swiper-slide"><img src="src/img/banner_5.jpg" alt="Banner 6"></div>
                 </div>
-                <div
-                    class="swiper-button-next !text-white !w-10 !h-10 bg-black/10 hover:bg-black/30 backdrop-blur-sm rounded-full after:!text-sm transition-all">
-                </div>
-                <div
-                    class="swiper-button-prev !text-white !w-10 !h-10 bg-black/10 hover:bg-black/30 backdrop-blur-sm rounded-full after:!text-sm transition-all">
-                </div>
+                <!-- dùng chung .swiper-nav-btn -->
+                <div class="swiper-button-next swiper-nav-btn"></div>
+                <div class="swiper-button-prev swiper-nav-btn"></div>
                 <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
 
-    <!-- Main Content: Danh sách sản phẩm -->
-    <!-- Main Content -->
+    <!-- ═══ MAIN: Sản phẩm ═══ -->
     <main class="container mx-auto px-4 py-16" id="sanPham">
-        <!-- Header: Tiêu đề "ĐIỆN THOẠI" căn giữa và có gạch đỏ dưới như ảnh -->
+
         <div class="text-center mb-10">
             <h2
-                class="text-2xl font-bold text-red-600 uppercase tracking-widest inline-block relative pb-2 border-b-2 border-red-500">
+                class="text-2xl font-bold text-red-600 uppercase tracking-widest inline-block pb-2 border-b-2 border-red-500">
                 Điện thoại
             </h2>
         </div>
 
-
-
-        <!-- Hàng Filter Brand & Tìm kiếm -->
+        <!-- Filter bar -->
         <div
-            class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-10 bg-[#85aac5] p-3 md:p-4 rounded-3xl">
-
-            <!-- BRAND + SORT -->
+            class="ph-filter-bar flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-10 p-3 md:p-4 rounded-3xl">
             <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
-
-                <!-- BRAND LIST -->
-                <div class="flex overflow-x-auto whitespace-nowrap gap-2 pb-2 lg:pb-0 scrollbar-hide flex-1"
-                    id="brandFilterContainer">
-                    <button
-                        class="brand-tab active px-5 py-2 rounded-full text-xs font-bold border border-gray-200 bg-blue-900 text-white shadow-md"
-                        data-brand="all">Tất Cả</button>
-
-                    <button
-                        class="brand-tab px-5 py-2 rounded-full text-xs font-medium border border-gray-200 bg-white text-gray-600 hover:text-blue-600"
-                        data-brand="iphone">iPhone</button>
-
-                    <button
-                        class="brand-tab px-5 py-2 rounded-full text-xs font-medium border border-gray-200 bg-white text-gray-600 hover:text-blue-600"
-                        data-brand="samsung">Samsung</button>
-
-                    <button
-                        class="brand-tab px-5 py-2 rounded-full text-xs font-medium border border-gray-200 bg-white text-gray-600 hover:text-blue-600"
-                        data-brand="xiaomi">Xiaomi</button>
-
-                    <button
-                        class="brand-tab px-5 py-2 rounded-full text-xs font-medium border border-gray-200 bg-white text-gray-600 hover:text-blue-600"
-                        data-brand="oppo">OPPO</button>
-
-                    <button
-                        class="brand-tab px-5 py-2 rounded-full text-xs font-medium border border-gray-200 bg-white text-gray-600 hover:text-blue-600"
-                        data-brand="google">Google</button>
-
-                    <button
-                        class="brand-tab px-5 py-2 rounded-full text-xs font-medium border border-gray-200 bg-white text-gray-600 hover:text-blue-600"
-                        data-brand="oneplus">OnePlus</button>
+                <div id="brandFilterContainer" class="flex overflow-x-auto whitespace-nowrap gap-2 pb-2 lg:pb-0 flex-1">
+                    <button class="brand-tab active" data-brand="all">Tất Cả</button>
+                    <button class="brand-tab" data-brand="iphone">iPhone</button>
+                    <button class="brand-tab" data-brand="samsung">Samsung</button>
+                    <button class="brand-tab" data-brand="xiaomi">Xiaomi</button>
+                    <button class="brand-tab" data-brand="oppo">OPPO</button>
+                    <button class="brand-tab" data-brand="google">Google</button>
+                    <button class="brand-tab" data-brand="oneplus">OnePlus</button>
                 </div>
-
-                <!-- SORT -->
-                <select
-                    class="bg-white border border-gray-200 rounded-full px-4 py-2 text-xs font-bold outline-none focus:border-blue-500 shadow-sm cursor-pointer w-full sm:w-auto"
-                    id="sortProduct">
+                <select id="sortProduct"
+                    class="ph-input rounded-full px-4 py-2 text-xs font-bold cursor-pointer w-full sm:w-auto">
                     <option value="default">Mặc định</option>
                     <option value="price-asc">Giá thấp → cao</option>
                     <option value="price-desc">Giá cao → thấp</option>
                 </select>
             </div>
-
-            <!-- SEARCH -->
             <div class="w-full lg:max-w-xs relative">
-                <input type="text" id="searchInput"
-                    class="w-full bg-white border border-gray-200 rounded-full pl-10 pr-4 py-2.5 text-xs focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all outline-none shadow-sm font-medium"
+                <input id="searchInput" type="text" class="ph-input rounded-full pl-10 pr-4 py-2.5 text-xs"
                     placeholder="Tìm kiếm sản phẩm...">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
             </div>
-
         </div>
 
-        <!-- Layout chia cột: Sidebar & Products -->
+        <!-- Sidebar + Products -->
         <div class="flex flex-col lg:flex-row gap-8">
 
-            <!-- Sidebar: 2 Banner -->
             <aside class="hidden lg:block w-1/4">
                 <div class="sticky top-24 flex flex-col gap-6">
-                    <div
-                        class="group cursor-pointer overflow-hidden rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 aspect-[1/1.5] bg-gray-200">
-                        <img src="src/img/sliderleft.webp" alt="QC 1"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <!-- dùng .banner-card, bỏ hết class hover/transition inline -->
+                    <div class="banner-card aspect-[1/1.5]">
+                        <img src="src/img/sliderleft.webp" alt="QC 1">
                     </div>
-                    <div
-                        class="group cursor-pointer overflow-hidden rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 aspect-[1/1.5] bg-gray-200">
-                        <img src="src/img/sliderright.webp" alt="QC 2"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    <div class="banner-card aspect-[1/1.5]">
+                        <img src="src/img/sliderright.webp" alt="QC 2">
                     </div>
                 </div>
             </aside>
 
-            <!-- Danh sách sản phẩm -->
-            <div class="flex-1 bg-[#85aac5] rounded-3xl p-2 pb-4 mode">
+            <div class="flex-1 ph-product-area rounded-3xl p-2 pb-4">
                 <div id="loading" class="hidden flex justify-center py-20">
                     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
                 </div>
-
-                <div id="danhSachSP"
-                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-6">
-                    <!-- Sản phẩm render ở đây -->
-                </div>
-
-                <div class="flex justify-center items-center space-x-2 mt-12" id="pagination"></div>
+                <div id="danhSachSP" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+                <div id="pagination" class="flex justify-center items-center space-x-2 mt-12"></div>
             </div>
+
         </div>
     </main>
-    <!-- Phần mở rộng: Ưu đãi & Mạng xã hội -->
+
+    <!-- ═══ ƯU ĐÃI & BLOG ═══ -->
     <div class="container mx-auto px-4 pb-24 space-y-24" id="uuDai">
-        <!-- Gian hàng ưu đãi (Đã fix đều nhau) -->
+
+        <!-- Gian hàng ưu đãi -->
         <section>
             <h2
                 class="text-xl font-black text-gray-800 dark:text-white mb-8 uppercase tracking-widest border-l-4 border-blue-600 pl-4">
-                Gian hàng ưu đãi</h2>
+
+                Gian hàng ưu đãi
+            </h2>
+            <!-- dùng .banner-card, bỏ group/cursor/shadow/transition inline -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Banner 1 -->
-                <div
-                    class="group cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-200 aspect-[3/4] banner-card">
-                    <img src="src/img/sales_1.avif" alt="Ưu đãi 1"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                </div>
-                <!-- Banner 2 -->
-                <div
-                    class="group cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-200 aspect-[3/4] banner-card">
-                    <img src="src/img/sales_2.jpg" alt="Ưu đãi 2"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                </div>
-                <!-- Banner 3 -->
-                <div
-                    class="group cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-200 aspect-[3/4] banner-card">
-                    <img src="src/img/sales_3.jpg" alt="Ưu đãi 3"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                </div>
-                <!-- Banner 4 -->
-                <div
-                    class="group cursor-pointer overflow-hidden rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 bg-gray-200 aspect-[3/4] banner-card">
-                    <img src="src/img/sales_4.webp" alt="Ưu đãi 4"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                </div>
+                <div class="banner-card aspect-[3/4]"><img src="src/img/sales_1.avif" alt="Ưu đãi 1"></div>
+                <div class="banner-card aspect-[3/4]"><img src="src/img/sales_2.jpg" alt="Ưu đãi 2"></div>
+                <div class="banner-card aspect-[3/4]"><img src="src/img/sales_3.jpg" alt="Ưu đãi 3"></div>
+                <div class="banner-card aspect-[3/4]"><img src="src/img/sales_4.webp" alt="Ưu đãi 4"></div>
             </div>
         </section>
-        <hr class="text-gray-200" id="blog">
-        <!-- Mạng xã hội (Tin tức/Blog) -->
+
+        <hr class="border-gray-200" id="blog">
+
+        <!-- Blog -->
         <section class="bg-white p-12 rounded-[3.5rem] shadow-sm border border-gray-100">
-            <h2 class="text-2xl font-black text-gray-800 mb-10 dark:text-white">Mạng xã hội phonehub.com</h2>
+
+            <h2 class="text-2xl font-black text-gray-800 dark:text-white mb-10">Mạng xã hội phonehub.com</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Blog Item -->
-                <a href="#" class="group block space-y-4">
-                    <div class="aspect-video overflow-hidden rounded-3xl bg-gray-50">
-                        <img src="src/img/gps_phone.jpg" alt="News"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <p
-                        class="text-sm font-bold text-gray-700 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        Mách bạn cách khắc phục vị trí GPS không chính xác cực hay
-                    </p>
+
+                <!-- dùng .blog-card + .blog-card__thumb + .blog-card__title -->
+                <a href="#" class="blog-card">
+                    <div class="blog-card__thumb"><img src="src/img/gps_phone.jpg" alt="GPS"></div>
+                    <p class="blog-card__title">Mách bạn cách khắc phục vị trí GPS không chính xác cực hay</p>
                 </a>
-                <a href="#" class="group block space-y-4">
-                    <div class="aspect-video overflow-hidden rounded-3xl bg-gray-50">
-                        <img src="src/img/lechmau.webp" alt="News"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <p
-                        class="text-sm font-bold text-gray-700 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        Độ sai lệch màu Delta E có ý nghĩa gì? Nên chọn màn hình thế nào?
-                    </p>
+
+                <a href="#" class="blog-card">
+                    <div class="blog-card__thumb"><img src="src/img/lechmau.webp" alt="Delta E"></div>
+                    <p class="blog-card__title">Độ sai lệch màu Delta E có ý nghĩa gì? Nên chọn màn hình thế nào?</p>
                 </a>
-                <a href="#" class="group block space-y-4">
-                    <div class="aspect-video overflow-hidden rounded-3xl bg-gray-50">
-                        <img src="src/img/thanhtoan" alt="News"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <p
-                        class="text-sm font-bold text-gray-700 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        Thanh toán qua thẻ UOB, giảm ngay 500.000đ cho tất cả sản phẩm
-                    </p>
+
+                <a href="#" class="blog-card">
+                    <div class="blog-card__thumb"><img src="src/img/thanhtoan" alt="Thanh toán"></div>
+                    <p class="blog-card__title">Thanh toán qua thẻ UOB, giảm ngay 500.000đ cho tất cả sản phẩm</p>
                 </a>
-                <a href="#" class="group block space-y-4">
-                    <div class="aspect-video overflow-hidden rounded-3xl bg-gray-50">
-                        <img src="src/img/oppox9.jpg" alt="News"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <p
-                        class="text-sm font-bold text-gray-700 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
-                        OPPO Find X9s có gì mới? Đánh giá chi tiết siêu phẩm camera
-                    </p>
+
+                <a href="#" class="blog-card">
+                    <div class="blog-card__thumb"><img src="src/img/oppox9.jpg" alt="OPPO X9"></div>
+                    <p class="blog-card__title">OPPO Find X9s có gì mới? Đánh giá chi tiết siêu phẩm camera</p>
                 </a>
+
             </div>
             <div class="mt-12 text-center">
                 <a href="#"
@@ -294,72 +204,82 @@
                 </a>
             </div>
         </section>
+
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 pt-10 pb-6 lg:pt-20 lg:pb-10 " id="contact">
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="bg-white border-t border-gray-100 pt-10 pb-6 lg:pt-20 lg:pb-10" id="contact">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-16">
-                <div class="">
+
+                <!-- Contact Form -->
+                <div>
                     <h2 class="text-3xl font-black text-blue-900 mb-2 italic">Liên hệ với PhoneHub</h2>
-                    <p class="text-gray-500 mb-8 font-medium  dark:text-white">Hỗ trợ tư vấn miễn phí 24/7</p>
+                    <p class="text-gray-500 dark:text-white mb-8 font-medium">Hỗ trợ tư vấn miễn phí 24/7</p>
+
                     <form class="space-y-4">
-                        <input type="text" placeholder="Họ và tên"
-                            class="w-full bg-gray-50 border-none rounded-2xl p-4 text-sm">
-                        <input type="email" placeholder="Email liên hệ"
-                            class="w-full bg-gray-50 border-none rounded-2xl p-4 text-sm">
+                        <input type="text" placeholder="Họ và tên" class="ph-input rounded-2xl p-4">
+                        <input type="email" placeholder="Email liên hệ" class="ph-input rounded-2xl p-4">
                         <textarea placeholder="Nội dung cần hỗ trợ..."
-                            class="w-full bg-gray-50 border-none rounded-2xl p-4 text-sm h-32 resize-none"></textarea>
-                        <button type="submit"
-                            class="bg-blue-600 text-white px-10 py-4 rounded-2xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all">Gửi
-                            tin nhắn</button>
+                            class="ph-input rounded-2xl p-4 h-32 resize-none"></textarea>
+                        <button type="submit" class="btn-primary px-10 py-4 rounded-2xl shadow-lg shadow-blue-200">
+                            Gửi tin nhắn
+                        </button>
                     </form>
                 </div>
+
+                <!-- Info -->
                 <div class="lg:pl-16 flex flex-col justify-center">
-                    <div class="flex items-center gap-3 mb-8">
-                        <a href="#" class="bg-blue-700 backdrop-blur px-2 py-1 rounded-lg">
-                            <img src="src/img/light-logo.png" class="w-full inline-block dark:hidden">
-                            <img src="src/img/dark-logo.png" class="w-full hidden dark:inline-block">
+                    <div class="mb-8">
+                        <a href="#" class="bg-blue-700 px-2 py-1 rounded-lg inline-block">
+                            <img src="src/img/light-logo.png" class="w-full inline-block dark:hidden" alt="Logo">
+                            <img src="src/img/dark-logo.png" class="w-full hidden dark:inline-block" alt="Logo">
                         </a>
                     </div>
-                    <div class="space-y-5 text-gray-600 font-medium">
-                        <div class="flex items-center gap-4  dark:text-white"><i
-                                class="fa-solid fa-location-dot text-blue-500"></i>Trụ
-                            sở: 112 Cao Thắng, Quận 3</div>
-                        <div class="flex items-center gap-4  dark:text-white"><i
-                                class="fa-solid fa-phone text-blue-500"></i> 1900 8888
-                        </div>
-                        <div class="flex items-center gap-4  dark:text-white"><i
-                                class="fa-solid fa-envelope text-blue-500"></i>
-                            hello@phonehub.vn</div>
+
+                    <!-- dùng .footer-info-row, bỏ flex/items-center/gap-4 inline -->
+                    <div class="space-y-5">
+                        <div class="footer-info-row"><i class="fa-solid fa-location-dot"></i> Trụ sở: 112 Cao Thắng,
+                            Quận 3</div>
+                        <div class="footer-info-row"><i class="fa-solid fa-phone"></i> 1900 8888</div>
+                        <div class="footer-info-row"><i class="fa-solid fa-envelope"></i> hello@phonehub.vn</div>
+
                     </div>
                 </div>
+
             </div>
             <div
-                class="border-t border-gray-50 pt-10 text-center text-xs font-bold text-gray-400 uppercase tracking-widest  dark:text-white">
-                <p>© 2026 PhoneHub. Thiết kế bởi <span class="text-blue-600 ">Hà Phượng & Gia Huy </span>.</p>
+                class="border-t border-gray-50 pt-10 text-center text-xs font-bold text-gray-400 dark:text-white uppercase tracking-widest">
+                <p>© 2026 PhoneHub. Thiết kế bởi <span class="text-blue-600">Hà Phượng &amp; Gia Huy</span>.</p>
+
             </div>
         </div>
     </footer>
 
-    <!-- Popups -->
+    <!-- ═══ POPUPS ═══ -->
+
+    <!-- Giỏ hàng -->
     <div id="popupGioHang" class="fixed inset-0 z-[100] hidden">
-        <div id="overlayGioHang" class="fixed inset-0 bg-black/40 backdrop-blur-sm"></div>
+        <div id="overlayGioHang" class="popup-overlay"></div>
         <div class="fixed top-0 right-0 h-full w-full sm:max-w-md bg-white shadow-2xl p-6 sm:p-8 overflow-y-auto">
             <div class="flex justify-between items-center mb-8">
                 <h3 class="text-2xl font-black text-blue-900">Giỏ hàng</h3>
                 <button class="close-cart text-3xl text-gray-400 hover:text-black">&times;</button>
             </div>
             <div id="noiDungGioHang" class="space-y-6"></div>
-            <div class="mt-5 border-t border-t-gray-300 pt-6">
-                <button class="w-full bg-blue-900 text-white py-5 rounded-2xl font-bold hover:bg-black transition-all"
-                    id="btnThanhToan">Thanh toán ngay</button>
+            <div class="mt-5 border-t border-gray-300 pt-6">
+                <button id="btnThanhToan"
+                    class="w-full bg-blue-900 text-white py-5 rounded-2xl font-bold hover:bg-black transition-all">
+                    Thanh toán ngay
+                </button>
             </div>
         </div>
     </div>
 
+    <!-- Chi tiết sản phẩm -->
     <div id="popupChiTiet" class="fixed inset-0 z-[100] hidden">
-        <div id="overlay" class="fixed inset-0 bg-black/40 backdrop-blur-sm"></div>
+        <div id="overlay" class="popup-overlay"></div>
         <div
             class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] max-w-2xl bg-white rounded-[3rem] p-10 shadow-2xl">
             <button id="btnClose"
@@ -368,10 +288,11 @@
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- ═══ SCRIPTS ═══ -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="src/app.js"></script>
+
 </body>
 
 </html>
