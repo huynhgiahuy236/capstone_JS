@@ -1,25 +1,20 @@
 import { el, state } from "./core.js";
 import { renderDanhSachSP } from "./product-flow.js";
 
-// ================= HÀM HỖ TRỢ (UTILITIES) =================
-const getSearchKeyword = () =>
-    (el.searchSP?.value || el.headerSearchInput?.value || "").toLowerCase().trim();
-
 // ================= FILTER + SORT =================
-export const thucHienLocVaSapXep = () => {
+export const thucHienLocVaSapXep = (keyword = "") => {
     const activeBtn = document.querySelector(".brand-tab.active");
     const brand = activeBtn?.dataset.brand || "all";
-    const keyword = getSearchKeyword();
     const sortValue = el.sortProduct?.value || "default";
 
-    // 1. FILTER: Lọc dữ liệu
+    // 1. FILTER
     let ketQua = state.danhSachSP.filter(({ name, type }) => {
         const matchesKeyword = name.toLowerCase().includes(keyword);
         const matchesBrand = brand === "all" || type.toLowerCase() === brand.toLowerCase();
         return matchesKeyword && matchesBrand;
     });
 
-    // 2. SORT: Sắp xếp dữ liệu
+    // 2. SORT
     const sortStrategies = {
         "price-asc": (a, b) => a.price - b.price,
         "price-desc": (a, b) => b.price - a.price,
@@ -31,7 +26,7 @@ export const thucHienLocVaSapXep = () => {
         ketQua.sort(sortStrategies[sortValue]);
     }
 
-    // 3. RENDER: Reset trang và hiển thị
+    // 3. RENDER
     state.currentPage = 1;
     renderDanhSachSP(ketQua);
 };
@@ -41,7 +36,6 @@ export const renderBrandFilter = () => {
     const container = el.brandFilterContainer;
     if (!container) return;
 
-    // Lấy danh sách brand duy nhất
     const brands = [...new Set(state.danhSachSP.map(sp => sp.type))];
 
     container.innerHTML = `
@@ -51,46 +45,54 @@ export const renderBrandFilter = () => {
         `).join("")}
     `;
 
-    // Event Delegation (Gắn sự kiện tập trung vào container)
     container.addEventListener("click", (e) => {
         const btn = e.target.closest(".brand-tab");
         if (!btn) return;
 
         container.querySelectorAll(".brand-tab").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
-        thucHienLocVaSapXep();
+
+        // Lấy keyword hiện tại từ bất kỳ ô nào đang có value
+        const keyword = (el.searchSP?.value || el.headerSearchInput?.value || "")
+            .toLowerCase()
+            .trim();
+        thucHienLocVaSapXep(keyword);
     });
 };
 
 // ================= EVENTS =================
 export const filterEvents = () => {
-    // 1. Sự kiện Sắp xếp
-    el.sortProduct?.addEventListener("change", thucHienLocVaSapXep);
+    // 1. Sort — giữ keyword hiện tại
+    el.sortProduct?.addEventListener("change", () => {
+        const keyword = (el.searchSP?.value || el.headerSearchInput?.value || "")
+            .toLowerCase()
+            .trim();
+        thucHienLocVaSapXep(keyword);
+    });
 
-    // 2. Hàm xử lý Search & Sync
+    // 2. Search sync + filter
+    const searchInputs = [el.searchSP, el.headerSearchInput].filter(Boolean);
+
     const handleSearchSync = (e) => {
         const value = e.target.value;
 
-        // Đẩy giá trị sang ô còn lại nếu nó tồn tại
-        if (el.searchSP && e.target !== el.searchSP) {
-            el.searchSP.value = value;
-        }
-        if (el.headerSearchInput && e.target !== el.headerSearchInput) {
-            el.headerSearchInput.value = value;
-        }
+        // Sync value sang ô còn lại
+        searchInputs.forEach(input => {
+            if (input !== e.target) input.value = value;
+        });
 
-        // Debounce để tránh render liên tục khi đang gõ
+        // Debounce — truyền keyword trực tiếp, không đọc lại từ DOM
         clearTimeout(state.timerId);
         state.timerId = setTimeout(() => {
-            thucHienLocVaSapXep();
+            thucHienLocVaSapXep(value.toLowerCase().trim());
         }, 300);
     };
 
-    // Gán sự kiện cho cả 2 ô
-    [el.searchSP, el.headerSearchInput].forEach(inputElement => {
-        inputElement?.addEventListener("input", handleSearchSync);
+    searchInputs.forEach(input => {
+        input.addEventListener("input", handleSearchSync);
     });
 };
+
 // ================= EXPORT =================
 export const filterSanPham = thucHienLocVaSapXep;
 export const bindFilterEvent = filterEvents;

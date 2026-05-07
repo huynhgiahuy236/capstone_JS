@@ -28,7 +28,6 @@ export const el = {
 
     //select_option
     sortProduct: document.getElementById("sortProduct"),
-    searchSP: document.getElementById("searchSP"),
 
     //fallback tự tạo container cho toast
     toastContainer: document.getElementById("toast-container") || (() => {
