@@ -1,9 +1,11 @@
 import { API_URL, el, errorEl, state } from "./core.js";
 import {
-    closeModal,
+  closeModal,
   renderProductList,
   resetForm,
   setupModal,
+  showConfirm,
+  showToast,
   toggleLoading,
   updateDashboard,
   updateImgHelper,
@@ -11,11 +13,22 @@ import {
 
 export const fetchProductList = async () => {
   toggleLoading(true);
+  el.productTableList.innerHTML = `
+    <tr>
+      <td colspan="7" class="loading-target py-10">
+        <span class="spinner mx-auto"></span>
+      </td>
+    </tr>`;
+  el.totalTypes.textContent = "";
+  el.totalQuantity.textContent = "";
+  el.maxPriceValue.textContent = "";
+  el.maxPriceName.textContent = "";
   try {
-    // await new Promise(resolve => setTimeout(resolve, 2000));
+    // await new Promise((resolve) => setTimeout(resolve, 2000));
     const response = await axios.get(API_URL);
     state.productList = response.data;
-    renderProductList(state.productList);
+    state.filteredList = [...response.data];
+    renderProductList(state.filteredList);
     updateDashboard(state.productList);
   } catch (error) {
     el.productTableList.innerHTML = `
@@ -110,12 +123,12 @@ export const createProduct = async () => {
   try {
     const response = await axios.post(API_URL, newProduct);
     resetForm();
-    closeModal()
-    alert("Tạo mới sản phẩm thành công");
+    closeModal();
+    showToast("Tạo mới sản phẩm thành công");
     await fetchProductList();
   } catch (error) {
     console.log(error);
-    alert("Có lỗi xảy ra khi tạo mới sản phẩm", error);
+    showToast("Có lỗi xảy ra khi tạo mới sản phẩm", "error");
   }
 };
 
@@ -124,27 +137,27 @@ export const updateProduct = async () => {
   const updatedProduct = getFormData();
   try {
     await axios.put(`${API_URL}/${state.editingProduct.id}`, updatedProduct);
-    alert("Cập nhật sản phẩm thành công");
+    showToast("Cập nhật sản phẩm thành công");
     resetForm();
-    closeModal()
+    closeModal();
     await fetchProductList();
   } catch (error) {
     console.log(error);
-    alert("Có lỗi xảy ra khi cập nhật sản phẩm", error);
+    showToast("Có lỗi xảy ra khi cập nhật sản phẩm", "error");
   }
 };
 
 // hàm xoá sản phẩm
 window.deleteProduct = async (productId) => {
-  const isConfirmed = confirm("Bạn có chắc chắn muốn xoá sản phẩm này không?");
+  const isConfirmed = await showConfirm("Xác nhận xóa", "Bạn có chắc chắn muốn xoá sản phẩm này khỏi hệ thống không?");
   if (!isConfirmed) return;
   try {
     await axios.delete(`${API_URL}/${productId}`);
-    alert("Xoá sản phẩm thành công");
+    showToast("Xoá sản phẩm thành công");
     await fetchProductList();
   } catch (error) {
     console.log(error);
-    alert("Có lỗi xảy ra khi xoá sản phẩm", error);
+    showToast("Có lỗi xảy ra khi xoá sản phẩm", "error");
   }
 };
 
@@ -153,7 +166,7 @@ window.editProduct = async (productId) => {
   try {
     const product = await state.productList.find((phone) => phone.id == productId);
     if (!product) {
-      alert("Không tìm thấy sản phẩm");
+      showToast("Không tìm thấy sản phẩm");
       return;
     }
     state.editingProduct = product;

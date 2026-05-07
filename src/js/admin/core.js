@@ -2,9 +2,11 @@ export const API_URL = "https://69cfbef7a4647a9fc675e9d2.mockapi.io/phone/phone"
 
 export const state = {
   productList: [],
+  filteredList: [],
   editingProduct: null,
   currentPage: 1,
   pageSize: 10,
+  sortConfig: { key: "id", direction: "asc" },
 };
 
 export const el = {
@@ -24,6 +26,9 @@ export const el = {
   // sort btn
   sortUp: document.querySelectorAll(".sort-up"),
   sortDown: document.querySelectorAll(".sort-down"),
+  // filter btn
+  filterIcon: document.getElementById("filter-icon"),
+  filterDropdown: document.getElementById("filter-dropdown"),
   // modal
   openAddModalBtn: document.getElementById("add-new-product"),
   modal: document.getElementById("modal"),
@@ -46,6 +51,14 @@ export const el = {
   updateBtn: document.getElementById("update-btn"),
   resetBtn: document.getElementById("reset-btn"),
   cancelBtn: document.getElementById("cancel-btn"),
+  // toast
+  toastContainer: document.getElementById("toast-container"),
+  confirmOverlay: document.getElementById("confirm-overlay"),
+  confirmBox: document.getElementById("confirm-box"),
+  confirmTitle: document.getElementById("confirm-title"),
+  confirmMsg: document.getElementById("confirm-msg"),
+  confirmYes: document.getElementById("confirm-yes"),
+  confirmNo: document.getElementById("confirm-no"),
 };
 
 export const errorEl = {

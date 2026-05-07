@@ -32,7 +32,10 @@
     @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-12;
   }
   .card {
-    @apply bg-white dark:bg-[#061223] shadow-lg sm:shadow-xl/30 shadow-blue-900 p-4 lg:p-6 rounded-xl border border-gray-200 dark:border-gray-800 overflow-x-hidden;
+    @apply bg-white dark:bg-[#0b1a31] shadow-lg sm:shadow-xl/30 shadow-blue-900 p-4 lg:p-6 rounded-xl border border-gray-200 dark:border-gray-800 overflow-x-hidden;
+  }
+  .dashboard-card {
+    @apply min-h-48 flex flex-col justify-between;
   }
   .icon {
     @apply bg-blue-900 rounded-full flex items-center justify-center;
@@ -52,7 +55,7 @@
     hover:scale-95 duration-500;
   }
   .input-box {
-    @apply bg-white dark:bg-[#061223] outline-none px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-800;
+    @apply bg-white dark:bg-[#0b1a31] outline-none px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-800;
   }
   .form-input {
     @apply flex flex-col gap-1.5;
@@ -60,10 +63,10 @@
   .err-msg {
     @apply text-red-600 italic;
   }
-  .sort-up {
-    @apply cursor-pointer hidden
+  .btn-action-icon {
+    @apply text-gray-400 hover:text-blue-500 cursor-pointer duration-200;
   }
-  .sort-down {
-    @apply cursor-pointer inline-block
+  .btn-action-icon.active {
+    @apply text-blue-500;
   }
 }

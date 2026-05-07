@@ -7,6 +7,8 @@ import {
   openModal,
   resetForm,
   searchProduct,
+  sortProduct,
+  toggleFilterDropdown,
 } from "./js/admin/ui-flow.js";
 
 // hàm xử lý form
@@ -52,6 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
   el.searchInput.addEventListener("input", searchProduct);
   el.searchBtn.addEventListener("click", searchProduct);
   // sort sản phẩm
-//   el.sortUp.forEach((btn, index) => btn.addEventListener("click", () => sortProduct(index, 1)));
-//   el.sortDown.forEach((btn, index) => btn.addEventListener("click", () => sortProduct(index, -1)));
+  el.sortUp.forEach((btn, index) => {
+    btn.parentElement.addEventListener("click", () => sortProduct(index));
+  });
+  // filter sản phẩm
+  el.filterIcon.addEventListener("click", toggleFilterDropdown);
+  window.addEventListener("click", (e) => {
+    if (!el.filterIcon.contains(e.target) && !el.filterDropdown.contains(e.target)) {
+      el.filterDropdown.classList.add("hidden");
+    }
+  });
 });

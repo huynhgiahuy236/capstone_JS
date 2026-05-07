@@ -42,31 +42,31 @@ export const renderProductList = (products) => {
   const end = start + state.pageSize;
   const items = products.slice(start, end);
 
-  const content = items.map((phone) => {
-    const quantityDisplay =
-      Number(phone.quantity) === 0
-        ? `<span class="text-red-500 font-bold">Hết hàng</span>`
-        : phone.quantity;
+  const content = items
+    .map((phone) => {
+      const quantityDisplay =
+        Number(phone.quantity) === 0 ? `<span class="text-red-500 font-bold">Hết hàng</span>` : phone.quantity;
 
-    return `
+      return `
       <tr class="text-left">
         <td>${phone.id}</td>
-        <td><img src="${phone.img}" class="w-12 h-12 object-cover rounded"></td>
+        <td class="hidden sm:table-cell"><img src="${phone.img}" class="w-12 h-12 object-cover rounded"></td>
         <td class="font-medium">${phone.name}</td>
         <td>${phone.type}</td>
         <td>${phone.price.toLocaleString()} VND</td>
         <td>${quantityDisplay}</td>
-        <td class="flex items-center gap-3 mt-2">
-          <button onclick="editProduct(${phone.id})" class="info-btn px-1.5 py-0.5">
+        <td class="flex items-center gap-1 sm:gap-3 mt-2">
+          <button onclick="editProduct(${phone.id})" class="info-btn px-1 sm:px-1.5 py-0.5">
             <i class="fa-solid fa-pencil fa-xs text-white"></i>
           </button>
-          <button onclick="deleteProduct(${phone.id})" class="danger-btn px-1.5 py-0.5">
+          <button onclick="deleteProduct(${phone.id})" class="danger-btn px-1 sm:px-1.5 py-0.5">
             <i class="fa-solid fa-trash fa-xs text-white"></i>
           </button>
         </td>
       </tr>
     `;
-  }).join("");
+    })
+    .join("");
 
   el.productTableList.innerHTML = content;
 
@@ -84,8 +84,8 @@ export const renderPagination = (totalItems) => {
     html += `
       <button 
         onclick="changePage(${i})"
-        class="px-3 py-1 rounded-lg text-sm font-medium 
-        ${i === state.currentPage ? 'bg-blue-600 text-white' : 'bg-gray-200'}">
+        class="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer 
+        ${i === state.currentPage ? "bg-blue-600 text-white" : "bg-gray-200 text-black"}">
         ${i}
       </button>
     `;
@@ -95,8 +95,9 @@ export const renderPagination = (totalItems) => {
 };
 window.changePage = (page) => {
   state.currentPage = page;
-  renderProductList(state.productList);
+  renderProductList(state.filteredList);
 };
+
 export const updateDashboard = (products) => {
   const types = [...new Set(products.map((p) => p.type))].length;
   const quantity = products.reduce((sum, p) => sum + Number(p.quantity), 0);
@@ -176,19 +177,89 @@ export const searchProduct = () => {
   renderProductList(filteredList);
 };
 
+// hàm filter sản phẩm
+export const renderFilterMenu = () => {
+  const types = ["Tất cả", ...new Set(state.productList.map((p) => p.type))];
+  el.filterDropdown.innerHTML = types
+    .map(
+      (type) => `
+    <li class="px-4 py-2 hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer" 
+        onclick="handleFilterType('${type}')">
+      ${type}
+    </li>
+  `,
+    )
+    .join("");
+};
+
+window.handleFilterType = (type) => {
+  el.filterDropdown.classList.add("hidden");
+
+  state.filteredList = type === "Tất cả" ? [...state.productList] : state.productList.filter((p) => p.type === type);
+
+  if (type === "Tất cả") el.filterIcon.parentElement.classList.remove("active");
+  else el.filterIcon.parentElement.classList.add("active");
+
+  state.currentPage = 1;
+  renderProductList(state.filteredList);
+};
+
+export const toggleFilterDropdown = (e) => {
+  e.stopPropagation();
+  const isHidden = el.filterDropdown.classList.contains("hidden");
+  if (isHidden) {
+    renderFilterMenu();
+    el.filterDropdown.classList.remove("hidden");
+  } else {
+    el.filterDropdown.classList.add("hidden");
+  }
+};
+
 // hàm sort list sản phẩm
-// export const sortProduct = (index, dir) => {
-//   const keys = ["id", "name", "price", "quantity"];
-//   const key = keys[index];
-//   state.productList.sort((a, b) => {
-//     const valA = key === "name" ? a[key].toLowerCase() : Number(a[key]);
-//     const valB = key === "name" ? b[key].toLowerCase() : Number(b[key]);
-//     return dir * (key === "name" ? valA.localeCompare(valB) : valA - valB);
-//   });
-//   renderProductList();
-//   el.sortUp[index].style.display = dir === 1 ? "none" : "inline-block";
-//   el.sortDown[index].style.display = dir === 1 ? "inline-block" : "none";
-// };
+export const sortProduct = (index) => {
+  const keys = ["id", "name", "price", "quantity"];
+  const key = keys[index];
+
+  if (state.sortConfig.key === key) {
+    state.sortConfig.direction = state.sortConfig.direction === "asc" ? "desc" : "asc";
+  } else {
+    state.sortConfig = { key, direction: "desc" };
+  }
+
+  const { direction } = state.sortConfig;
+
+  state.filteredList.sort((a, b) => {
+    let vA = a[key],
+      vB = b[key];
+    if (["id", "price", "quantity"].includes(key)) {
+      return direction === "asc" ? Number(vA) - Number(vB) : Number(vB) - Number(vA);
+    }
+    vA = String(vA).toLowerCase();
+    vB = String(vB).toLowerCase();
+    return direction === "asc" ? vA.localeCompare(vB) : vB.localeCompare(vA);
+  });
+
+  // cập nhật UI Icon
+  el.sortUp.forEach((upBtn, i) => {
+    const downBtn = el.sortDown[i];
+
+    if (i === index) {
+      const isAsc = direction === "asc";
+      upBtn.classList.toggle("hidden", isAsc);
+      upBtn.classList.toggle("inline-block", !isAsc);
+      downBtn.classList.toggle("hidden", !isAsc);
+      downBtn.classList.toggle("inline-block", isAsc);
+    } else {
+      upBtn.classList.add("hidden");
+      upBtn.classList.remove("inline-block");
+      downBtn.classList.remove("hidden");
+      downBtn.classList.add("inline-block");
+    }
+  });
+
+  state.currentPage = 1;
+  renderProductList(state.filteredList); // Render mảng đã sort
+};
 
 // hàm tăng/giảm số lượng
 export const handleQuantityChange = (action) => {
@@ -206,4 +277,52 @@ export const handleQuantityChange = (action) => {
     el.minusQuantity.style.opacity = val <= 0 ? "0.5" : "1";
   }
   validateField("quantity");
+  setTimeout(() => {
+    input.focus(); 
+  }, 0);
+};
+
+// hàm toast (thay thế alert)
+export const showToast = (message, type = "success") => {
+  const toast = document.createElement("div");
+
+  const borderCol = type === "success" ? "border-l-blue-500" : "border-l-red-600";
+  const icon = type === "success" ? "fa-circle-check text-blue-500" : "fa-circle-xmark text-red-600";
+
+  toast.className = `card flex items-center gap-4 min-w-[280px] border-l-4 ${borderCol} mb-3 py-3 shadow-2xl`;
+  toast.innerHTML = `
+  <span class="font-medium text-sm">${message}</span>
+  <i class="fa-solid ${icon} fa-lg"></i>
+  `;
+
+  el.toastContainer.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateY(-20px)";
+    toast.style.transition = "all 0.5s ease";
+    setTimeout(() => toast.remove(), 500);
+  }, 2000);
+};
+
+// hàm confirm (thay thế confirm)
+export const showConfirm = (title, message) => {
+  return new Promise((resolve) => {
+    el.confirmTitle.innerText = title;
+    el.confirmMsg.innerText = message;
+
+    el.confirmOverlay.classList.remove("hidden");
+    // Animation scale nhẹ
+    el.confirmBox.classList.remove("scale-95", "opacity-0");
+    el.confirmBox.classList.add("scale-100", "opacity-100");
+
+    const handleClose = (result) => {
+      el.confirmOverlay.classList.add("hidden");
+      el.confirmBox.classList.add("scale-95", "opacity-0");
+      resolve(result);
+    };
+
+    el.confirmYes.onclick = () => handleClose(true);
+    el.confirmNo.onclick = () => handleClose(false);
+  });
 };
