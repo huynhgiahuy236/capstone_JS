@@ -52,12 +52,6 @@ body {
     color var(--transition);
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
 /* ── 3. COMPONENTS ── */
 @layer components {
   /* — Buttons — */
@@ -68,7 +62,9 @@ img {
   .btn-secondary {
     @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-xl font-medium hover:bg-gray-200 transition-all;
   }
-
+  .link-hover {
+    @apply hover:translate-y-[-8px] hover:text-green-700 transition-all duration-300 transform;
+  }
   /* — Form input — */
   .ph-input {
     @apply w-full rounded-xl p-3 outline-none text-sm font-medium transition-all;
@@ -93,7 +89,6 @@ img {
   .product-card:hover {
     box-shadow: var(--shadow-hover);
   }
-
   /* — Banner / promo card — */
   .banner-card {
     @apply overflow-hidden bg-gray-200 cursor-pointer
@@ -170,10 +165,10 @@ img {
   background: #0f172a;
 }
 
-nav {
+.nav-app {
   transition: all var(--transition);
 }
-.dark nav {
+.dark .nav-app {
   background: linear-gradient(90deg, #020617, #0f172a);
   border-bottom: 1px solid var(--border-color);
 }
@@ -298,12 +293,6 @@ nav {
 
 .dark .text-gray-700 {
   color: #e2e8f0 !important;
-}
-.dark table {
-  background: #020617;
-}
-.dark td {
-  border-top: 1px solid var(--border-color);
 }
 
 .dark .ph-input {
