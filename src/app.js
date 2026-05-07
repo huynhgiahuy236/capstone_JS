@@ -14,9 +14,10 @@ const closeModals = () => {
 };
 
 // --- 3. Khởi tạo app ---
-const initApp = () => {
-    // Load giỏ hàng từ localStorage
+const initApp = async () => {
+
     const data = localStorage.getItem("GIO_HANG");
+
     if (data) {
         try {
             state.gioHang = JSON.parse(data);
@@ -26,19 +27,16 @@ const initApp = () => {
         }
     }
 
-    // 🔥 Update badge
     capNhatSoLuongGioHang();
 
-    // Slider
     initSlider();
 
-    // Filter
     filterEvents();
 
-    // API
-    layDanhSachSP();
-};
+    // 🔥 CHỜ LOAD SP XONG
+    await layDanhSachSP();
 
+};
 // --- 4. DOM READY ---
 document.addEventListener("DOMContentLoaded", () => {
     // Gán event sau khi DOM load

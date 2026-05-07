@@ -95,7 +95,7 @@ el.noiDungGioHang.addEventListener("click", (e) => {
     luuGioHang();
 });
 
-// ================== THANH TOÁN (FIX LỖI ĐƠ CUỘN) ==================
+// ================== THANH TOÁN  ==================
 export const handleThanhToan = () => {
     if (state.gioHang.length === 0) return;
 

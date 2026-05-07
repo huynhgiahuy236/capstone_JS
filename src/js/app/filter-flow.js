@@ -1,86 +1,151 @@
 import { el, state } from "./core.js";
 import { renderDanhSachSP } from "./product-flow.js";
 
-//Hàm xử lý chính: Kết hợp Lọc (Thương hiệu + Tìm kiếm) và Sắp xếp
-
+// ================= FILTER + SORT =================
 export const thucHienLocVaSapXep = () => {
-    // 1. Lấy Thương hiệu từ nút đang Active
+
     const activeBtn = document.querySelector(".brand-tab.active");
-    const brand = activeBtn ? activeBtn.getAttribute("data-brand") : "all";
 
-    // 2. Lấy Từ khóa tìm kiếm
-    // Ưu tiên ô tìm kiếm ở phần sản phẩm (searchInput), nếu trống thì lấy ở header
-    const searchInput = document.getElementById('searchInput');
-    const headerSearch = document.getElementById('headerSearchInput');
+const brand = activeBtn
+        ? activeBtn.dataset.brand
+        : "all";
+    const keyword = (
+        el.searchSP?.value ||
+        el.headerSearchInput?.value ||
+        ""
+    ).toLowerCase().trim();
 
-    const keyword = (searchInput?.value || headerSearch?.value || "").toLowerCase().trim();
+    const sortValue = el.sortProduct
+        ? el.sortProduct.value
+        : "default";
 
-    // 3. Lấy giá trị Sắp xếp từ Select Option
-    const sortValue = el.sortProduct ? el.sortProduct.value : "default";
-
-    // --- Bắt đầu lọc dữ liệu ---
+    // FILTER
     let ketQua = state.danhSachSP.filter(phone => {
-        const matchesKeyword = phone.name.toLowerCase().includes(keyword);
-        const matchesBrand = brand === "all" || phone.type.toLowerCase() === brand.toLowerCase();
+
+        const matchesKeyword =
+            phone.name.toLowerCase().includes(keyword);
+
+        const matchesBrand =
+            brand === "all" ||
+            phone.type.toLowerCase() === brand.toLowerCase();
+
         return matchesKeyword && matchesBrand;
     });
 
-    // --- Bắt đầu sắp xếp dữ liệu ---
-    if (sortValue === "price-asc") {
-        ketQua.sort((a, b) => a.price - b.price);
-    } else if (sortValue === "price-desc") {
-        ketQua.sort((a, b) => b.price - a.price);
-    } else if (sortValue === "name-asc") {
-        ketQua.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (sortValue === "name-desc") {
-        ketQua.sort((a, b) => b.name.localeCompare(a.name));
+    // SORT
+    switch (sortValue) {
+
+        case "price-asc":
+            ketQua.sort((a, b) => a.price - b.price);
+            break;
+
+        case "price-desc":
+            ketQua.sort((a, b) => b.price - a.price);
+            break;
+
+        case "name-asc":
+            ketQua.sort((a, b) =>
+                a.name.localeCompare(b.name)
+            );
+            break;
+
+        case "name-desc":
+            ketQua.sort((a, b) =>
+                b.name.localeCompare(a.name)
+            );
+            break;
     }
 
-    // Cập nhật trạng thái trang và render
     state.currentPage = 1;
+
     renderDanhSachSP(ketQua);
 };
 
-// Đăng ký tất cả sự kiện lọc
-export const filterEvents = () => {
-    // A. Sự kiện cho các nút Tab Brand
-    const brandButtons = document.querySelectorAll(".brand-tab");
+// ================= Hiện thị btn-branch =================
+export const renderBrandFilter = () => {
+
+    const container = el.brandFilterContainer
+
+    if (!container) return;
+
+    // loại bỏ brand trùng
+    const brands = [
+        ...new Set(
+            state.danhSachSP.map(sp => sp.type)
+        )
+    ];
+
+    container.innerHTML = `
+        <button class="brand-tab active" data-brand="all">
+            Tất Cả
+        </button>
+
+        ${brands.map(brand => `
+            <button
+                class="brand-tab"
+                data-brand="${brand.toLowerCase()}"
+            >
+                ${brand}
+            </button>
+        `).join("")}
+    `;
+
+    // EVENT CLICK BRAND
+    const brandButtons = container.querySelectorAll(".brand-tab");
     brandButtons.forEach(btn => {
+
         btn.addEventListener("click", () => {
-            brandButtons.forEach(b => b.classList.remove("active"));
+
+            brandButtons.forEach(b =>
+                b.classList.remove("active")
+            );
+
             btn.classList.add("active");
+
             thucHienLocVaSapXep();
         });
+
     });
+};
 
-    // B. Sự kiện cho Select Sort (Sắp xếp)
+// ================= EVENTS =================
+export const filterEvents = () => {
+    // SORT
     if (el.sortProduct) {
-        el.sortProduct.addEventListener("change", thucHienLocVaSapXep);
+        el.sortProduct.addEventListener(
+            "change",
+            thucHienLocVaSapXep
+        );
     }
-
-    // C. Sự kiện cho ô Search (Xử lý đồng bộ và Debounce)
+    // SEARCH
     const setupSearchEvent = (inputElement) => {
         if (!inputElement) return;
         inputElement.addEventListener("input", (e) => {
+
             const val = e.target.value;
+            // sync 2 ô search
+            const otherInput =
+                inputElement.id === "searchInput"
+                    ? el.headerSearchInput
+                    : el.searchSP
 
-            // Đồng bộ text sang ô search còn lại
-            const otherInput = (inputElement.id === 'searchInput')
-                ? document.getElementById('headerSearchInput')
-                : document.getElementById('searchInput');
-
-            if (otherInput) otherInput.value = val;
-
-            // Debounce để tránh render quá nhiều lần khi gõ nhanh
+            if (otherInput) {
+                otherInput.value = val;
+            }
             clearTimeout(state.timerId);
-            state.timerId = setTimeout(thucHienLocVaSapXep, 500);
+            state.timerId = setTimeout(
+                thucHienLocVaSapXep,
+                500
+            );
         });
     };
 
-    setupSearchEvent(document.getElementById('searchInput'));
-    setupSearchEvent(document.getElementById('headerSearchInput'));
+    setupSearchEvent(el.searchSP);
+    setupSearchEvent(el.headerSearchInput)
+
 };
 
-//export const
-export const filterSanPham = () => thucHienLocVaSapXep();
-export const bindFilterEvent = () => filterEvents();
+// ================= EXPORT =================
+export const filterSanPham = thucHienLocVaSapXep;
+
+export const bindFilterEvent = filterEvents;

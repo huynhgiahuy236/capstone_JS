@@ -5,12 +5,15 @@ export const el = {
     loading: document.getElementById("loading"),
     searchSP: document.getElementById("searchInput"),
     filterSanPham: document.getElementById("filterSelect"),
+    headerSearchInput: document.getElementById("headerSearchInput"),
+    brandFilterContainer: document.getElementById("brandFilterContainer"),
 
     // Popup chi tiết
     popup: document.getElementById("popupChiTiet"),
     btnClosePopup: document.getElementById("btnClose"),
     contentPopup: document.getElementById("popupContent"),
     overlay: document.getElementById("overlay"),
+    toggleTheme: document.getElementById("toggleTheme"),
 
     // Giỏ hàng
     popupGioHang: document.getElementById("popupGioHang"),
@@ -18,12 +21,13 @@ export const el = {
     noiDungGioHang: document.getElementById("noiDungGioHang"),
     btnGioHang: document.getElementById("btnGioHang"),
     badgeGioHang: document.getElementById("badgeGioHang"),
-    btnThanhToan :document.getElementById("btnThanhToan"),
+    btnThanhToan: document.getElementById("btnThanhToan"),
+
     //ui-flow
     pagination: document.getElementById("pagination"),
 
     //select_option
-    sortProduct: document.getElementById("sortProduct"), 
+    sortProduct: document.getElementById("sortProduct"),
     searchSP: document.getElementById("searchSP"),
 
     //fallback tự tạo container cho toast
