@@ -85,7 +85,7 @@ export const renderPagination = (totalItems) => {
       <button 
         onclick="changePage(${i})"
         class="px-3 py-1 rounded-lg text-sm font-medium cursor-pointer 
-        ${i === state.currentPage ? "bg-blue-600 text-white" : "bg-gray-200"}">
+        ${i === state.currentPage ? "bg-blue-600 text-white" : "bg-gray-200 text-black"}">
         ${i}
       </button>
     `;
