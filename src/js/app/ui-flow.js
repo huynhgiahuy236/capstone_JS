@@ -21,7 +21,11 @@ export const initSlider = () => {
         },
     });
 };
-
+// menu
+document.getElementById("btnMenu").onclick = () => {
+    const menu = document.getElementById("menu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+};
 // ===== 2. SEARCH FLOW =====
 export const initSearchFlow = () => {
     const header = document.getElementById("headerSearchInput");

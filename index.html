@@ -18,11 +18,28 @@
         <div class="container mx-auto px-3 md:px-4 h-16 flex items-center justify-between gap-3">
 
             <!-- Logo + Nav links -->
-            <div class="flex items-center space-x-20">
-                <a href="#">
+            <div class="flex items-center space-x-10">
+                <a href="#"  class="hidden lg:block">
                     <img src="src/img/light-logo.png" alt="PhoneHub" class="w-40 dark:hidden">
                     <img src="src/img/dark-logo.png" alt="PhoneHub" class="w-40 hidden dark:block">
                 </a>
+                
+                <!-- Nút hamburger (chỉ mobile) -->
+                <div class="relative md:hidden">
+                    <button id="btnMenu"
+                        class="text-2xl cursor-pointer text-white border px-2 pb-1 hover:bg-blue-900 rounded-lg">
+                        ☰
+                    </button>
+                    <!-- Mobile dropdown -->
+                    <div id="menu" class="hidden absolute top-12 left-0 bg-white text-black
+                           rounded-lg shadow-lg z-50 min-w-[160px] py-2">
+                        <a href="#sanPham" class="block py-2 px-4 hover:bg-blue-50 hover:text-blue-600">Sản phẩm</a>
+                        <a href="#uuDai" class="block py-2 px-4 hover:bg-blue-50 hover:text-blue-600">Ưu đãi</a>
+                        <a href="#blog" class="block py-2 px-4 hover:bg-blue-50 hover:text-blue-600">Bài viết</a>
+                        <a href="#contact" class="block py-2 px-4 hover:bg-blue-50 hover:text-blue-600">Liên hệ</a>
+                    </div>
+                </div>
+                <!-- Desktop menu -->
                 <div class="hidden md:flex space-x-6 font-medium text-sm text-white">
                     <a href="#sanPham" class="link-hover">Sản phẩm</a>
                     <a href="#uuDai" class="link-hover">Ưu đãi</a>
@@ -49,15 +66,16 @@
                     <span id="badgeGioHang"
                         class="absolute top-0 right-0 bg-red-500 text-white text-[9px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
                 </button>
+
             </div>
 
             <!-- Admin link -->
             <a href="/src/admin.html" class="flex items-center gap-2 bg-white dark:bg-slate-900
-                text-blue-700 dark:text-blue-400
-                px-4 py-2.5 rounded-xl font-medium text-sm
-                border border-gray-200 dark:border-slate-700
-                shadow-sm hover:shadow-md hover:bg-gray-100 dark:hover:bg-slate-800
-                transition-all duration-300">
+            text-blue-700 dark:text-blue-400
+            px-4 py-2.5 rounded-xl font-medium text-sm
+            border border-gray-200 dark:border-slate-700
+            shadow-sm hover:shadow-md hover:bg-gray-100 dark:hover:bg-slate-800
+            transition-all duration-300">
                 <span class="hidden sm:inline">Trang quản trị</span>
                 <i class="fa-solid fa-user-tie"></i>
             </a>
