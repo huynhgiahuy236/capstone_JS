@@ -78,7 +78,9 @@ body {
   .ph-input::placeholder {
     color: var(--text-muted);
   }
-
+  .dark-text{
+    @apply !text-blue-800 text-xl font-black uppercase mb-8 tracking-widest border-l-4 border-blue-600 pl-4;
+  }
   /* — Product card — */
   .product-card {
     @apply rounded-2xl p-5 flex flex-col border transition-all duration-300;
@@ -104,7 +106,6 @@ body {
   .banner-card:hover img {
     transform: scale(1.08);
   }
-
   /* — Swiper nav (prev & next dùng chung) — */
   .swiper-nav-btn {
     @apply !text-white !w-10 !h-10 bg-black/10 hover:bg-black/30
@@ -133,7 +134,7 @@ body {
 
   /* — Footer info row — */
   .footer-info-row {
-    @apply flex items-center gap-4 font-medium text-gray-600 dark:text-white;
+    @apply flex items-center gap-4 font-medium text-gray-600 ;
   }
   .footer-info-row i {
     @apply text-blue-500 w-4 text-center;
@@ -292,7 +293,7 @@ body {
 }
 
 .dark .text-gray-700 {
-  color: #e2e8f0 !important;
+  color: #e2e8f0;
 }
 
 .dark .ph-input {
