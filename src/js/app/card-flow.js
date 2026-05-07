@@ -41,10 +41,10 @@ export const renderGioHang = () => {
         const isMin = item.soLuong === 1;
         html += `
         <div class="item flex gap-4 p-4 bg-gray-50 rounded-xl mb-3 shadow-sm" data-id="${item.id}">
-            <img src="${item.img}" class="w-20 object-contain bg-white rounded-lg">
+            <img src="${item.img}" class="w-20 h-full object-contain bg-white rounded-lg">
             <div class="flex-1">
-                <h4 class="font-bold text-gray-800">${item.name}</h4>
-                <p class="text-blue-600 font-semibold">${item.price.toLocaleString()}₫</p>
+                <h4 class="font-bold text-blue-500 pb-1">${item.name}</h4>
+                <p class="text-green-600 font-semibold">${item.price.toLocaleString()}₫</p>
                 <div class="flex items-center gap-3 mt-2">
                     <button class="giam w-8 h-8 flex items-center justify-center bg-white rounded border border-gray-200 shadow-sm ${isMin ? 'opacity-30 cursor-not-allowed' : 'hover:bg-blue-50'}" 
                             ${isMin ? 'disabled' : ''}>-</button>
@@ -52,7 +52,7 @@ export const renderGioHang = () => {
                     <button class="tang w-8 h-8 flex items-center justify-center bg-white rounded border border-gray-200 shadow-sm hover:bg-blue-50">+</button>
                 </div>
             </div>
-            <button class="xoa text-red-400 hover:text-red-600 p-2 transition-colors">✕</button>
+            <button class="xoa text-red-400 hover:text-red-600 p-2 text-2xl  transition-colors"><i class="fa-solid fa-delete-left"></i></button>
         </div>`;
     });
 

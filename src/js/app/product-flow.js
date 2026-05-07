@@ -77,7 +77,7 @@ export const renderDanhSachSP = (danhSach) => {
 
             <!-- Thông tin sản phẩm -->
             <div class="flex flex-col flex-1">
-                <h3 class="font-bold text-gray-800 text-lg lg:text-xl mb-2 truncate ${!isOutOfStock ? 'group-hover:text-blue-900' : ''} transition-colors dark:text-white">
+                <h3 class="font-bold text-gray-700 text-lg lg:text-xl mb-2 truncate ${!isOutOfStock ? 'group-hover:text-blue-900' : ''} transition-colors ">
                     ${phone.name}
                 </h3>
                 
@@ -191,7 +191,7 @@ window.xemNhanhSanPham = (id) => {
             <div class="w-full md:w-1/2 flex flex-col text-left">
                 <div class="flex-1">
                     <span class="text-blue-900 font-black text-xs uppercase tracking-widest mb-2 block">${phone.type}</span>
-                    <h2 class="text-3xl font-black text-gray-900 leading-tight mb-2">${phone.name}</h2>
+                    <h2 class="text-3xl font-black text-blue-500 leading-tight mb-2">${phone.name}</h2>
                     <p class="text-2xl font-black text-red-600 mb-6">${Number(phone.price).toLocaleString()} ₫</p>
                     
                     <div class="grid grid-cols-1 gap-4 mb-8">
